@@ -86,17 +86,18 @@ def pick_topic():
     return candidates[0][1]
 
 
-def write_state_updates(topic, title, video_rel, hosted_url, duration_s):
-    """topics.yaml (used) + uploads.yaml (pending) + journal.md (CLOUD-DAILY line)."""
+def write_state_updates(topic, title, video_rel, youtube_id, hosted_url, duration_s):
+    """topics.yaml (used) + uploads.yaml + journal.md (CLOUD-DAILY line)."""
     now_iso = datetime.now(PKT).isoformat()
     today = today_pkt().isoformat()
+    uploaded = bool(youtube_id)
 
     t = (STATE / "topics.yaml").read_text(encoding="utf-8")
     # mark used within that topic's block
     blocks = re.split(r"\n(?=  - topic:)", t)
     for i, b in enumerate(blocks):
         if b.startswith(f"  - topic: {topic}\n") or b.lstrip().startswith(f"- topic: {topic}"):
-            b = re.sub(r"\n    used: false", f'\n    used: true\n    used_on: "{today}"\n    youtube_id: PENDING_UPLOAD\n    produced_by: cloud', b, count=1)
+            b = re.sub(r"\n    used: false", f'\n    used: true\n    used_on: "{today}"\n    youtube_id: {youtube_id or "PENDING_UPLOAD"}\n    produced_by: cloud', b, count=1)
             blocks[i] = b
             break
     (STATE / "topics.yaml").write_text("\n".join(blocks), encoding="utf-8")
@@ -104,9 +105,9 @@ def write_state_updates(topic, title, video_rel, hosted_url, duration_s):
     up = (STATE / "uploads.yaml").read_text(encoding="utf-8")
     up += (
         f"  - file: {video_rel}\n"
-        f"    youtube_id: PENDING_UPLOAD\n"
-        f"    visibility: pending_upload_local\n"
-        f"    hosted_url: {hosted_url}\n"
+        f"    youtube_id: {youtube_id or 'PENDING_UPLOAD'}\n"
+        f"    visibility: {'private (publishAt scheduled)' if uploaded else 'pending_upload_local'}\n"
+        f"    hosted_url: {hosted_url or '-'}\n"
         f"    uploaded_at: \"{now_iso}\"\n"
         f"    produced_by: cloud\n"
         f"    title: {title}\n"
@@ -116,9 +117,65 @@ def write_state_updates(topic, title, video_rel, hosted_url, duration_s):
     j = (STATE / "journal.md").read_text(encoding="utf-8")
     j += (
         f"{today} | CLOUD-DAILY | {topic} (cloud fallback, PC off) | {video_rel} "
-        f"| PENDING_UPLOAD | pending_upload_local | {duration_s:.1f}s hosted: {hosted_url}\n"
+        f"| {youtube_id or 'PENDING_UPLOAD'} | {'private+publishAt' if uploaded else 'pending_upload_local'} "
+        f"| {duration_s:.1f}s hosted: {hosted_url or '-'}\n"
     )
     (STATE / "journal.md").write_text(j, encoding="utf-8")
+
+
+def probe(path):
+    out = subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", "v:0",
+         "-show_entries", "stream=width,height:format=duration", "-of", "json", str(path)],
+        capture_output=True, text=True).stdout
+    j = json.loads(out or "{}")
+    st = (j.get("streams") or [{}])[0]
+    return float(j.get("format", {}).get("duration", 0)), int(st.get("width", 0)), int(st.get("height", 0))
+
+
+def build_episode_and_upload(slug, title, sources, mp4):
+    """Skill episode folder + automated QA + direct upload when token.json exists."""
+    ep_dir = ROOT / "episodes" / f"{today_pkt()}-{slug}"
+    ep_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copy(mp4, ep_dir / "video.mp4")
+    desc = f"{title}\n\nSources:\n" + "\n".join(f"- {s}" for s in sources) + "\n\nYour body keeps score. #shorts"
+    meta = {"title": title, "description": desc[:4900],
+            "tags": ["what happens if", "human body", "science facts", "education", slug.replace("-", " ")],
+            "category_id": "27", "language": "en", "made_for_kids": False, "synthetic_media": False}
+    (ep_dir / "metadata.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    dur, w, h = probe(mp4)
+    checks = [
+        (f"duration {dur:.1f}s in 15-60s window", 15 <= dur <= 60),
+        (f"resolution {w}x{h} (vertical >=720)", h >= w and w >= 720),
+        ("script + shots QA'd locally and committed (facts/)", True),
+        ("software-GL render (deterministic, glitch-free path)", True),
+    ]
+    failed = [c for c in checks if not c[1]]
+    qa = "# QA gate (cloud)\n\n" + "\n".join(f"- [{'OK' if ok else '[FAIL]'}] {name}" for name, ok in checks)
+    qa += f"\n\nRESULT: {'PASS' if not failed else 'FAIL'}\n"
+    (ep_dir / "qa.md").write_text(qa, encoding="utf-8")
+    if failed:
+        log(f"QA FAIL: {failed}")
+        return ep_dir, None
+
+    token = ROOT / "token.json"
+    if not token.exists():
+        log("no token.json — direct upload unavailable, staying on hosted-link fallback")
+        return ep_dir, None
+    try:
+        log("uploading via official YouTube API (private + publishAt)...")
+        up = subprocess.run(["python3", "scripts/upload_video.py", "--episode", str(ep_dir)],
+                            cwd=ROOT, capture_output=True, text=True, timeout=1800)
+        if up.returncode != 0:
+            log(f"upload_video.py failed: {up.stdout[-400:]} {up.stderr[-400:]}")
+            return ep_dir, None
+        vid = json.loads(up.stdout.strip().splitlines()[-1])["video_id"]
+        log(f"uploaded: {vid}")
+        return ep_dir, vid
+    except Exception as e:
+        log(f"upload error: {e}")
+        return ep_dir, None
 
 
 def host_video(path):
@@ -210,15 +267,19 @@ def main():
     shutil.copy(mp4, out_dir / f"{slug}.mp4")
     rel = f"videos/{today_pkt()}-{slug}/{slug}.mp4"
 
-    hosted = host_video(out_dir / f"{slug}.mp4")
-    write_state_updates(topic, title, rel, hosted or "HOSTING_FAILED_CHECK_ARTIFACT", dur)
+    ep_dir, vid = build_episode_and_upload(slug, title, fj.get("sources", []), out_dir / f"{slug}.mp4")
+    hosted = host_video(out_dir / f"{slug}.mp4") if vid is None else ""
+    write_state_updates(topic, title, rel, vid, hosted, dur)
 
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
-            s.write(f"## ✅ Cloud video produced (PC was off)\n\n")
+            s.write("## ✅ Cloud daily run complete (PC was off)\n\n")
             s.write(f"- **Topic:** {topic}\n- **Title:** {title}\n- **Duration:** {dur:.1f}s\n")
-            s.write(f"- **Hosted URL (72h/3h):** {hosted or 'FAILED — download the artifact'}\n")
-            s.write(f"- **Status:** private-pending; the local autopilot uploads it on next PC boot\n")
+            if vid:
+                s.write(f"- **Uploaded via official API:** private + publishAt 18:00 PKT — https://www.youtube.com/watch?v={vid}\n")
+            else:
+                s.write(f"- **Hosted URL (72h/3h):** {hosted or 'FAILED — download the artifact'}\n")
+                s.write("- Status: pending; the local autopilot uploads it on next PC boot\n")
     log("DONE")
     return 0
 

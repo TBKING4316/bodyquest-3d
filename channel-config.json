@@ -48,6 +48,21 @@
     "reply_categories_allowed": ["thanks", "simple-question"],
     "escalate": ["medical", "legal", "financial", "harassment", "personal"]
   },
+  "monetization_guard": {
+    "goal": "YouTube Partner Program — channel must stay fully monetizable",
+    "rules": [
+      "every episode a genuinely different topic AND different visual treatment; no templated re-voices or re-skins (inauthentic-content policy)",
+      "all assets original: engine-rendered 3D, procedurally generated sound, original scripts; never reuse another creator's footage, thumbnail, characters or voice",
+      "no voice cloning of real people; synthetic narration disclosed only if photoreal",
+      "every factual claim needs a dated authoritative source; health claims stay conservative with caveats",
+      "honest titles and thumbnails; no engagement bait; no promises of views or income",
+      "made_for_kids stays false; nothing targets children",
+      "no dangerous-stunt glorification: harmful behaviors framed as 'don't do this', with the medical evidence",
+      "QA gate (RESULT: PASS) blocks any upload; a failed gate is fixed or the day is skipped"
+    ],
+    "revenue_track": "YPP: 1,000 subscribers + 4,000 public watch-hours OR 10M Shorts views/90 days; requires PUBLIC videos — publishAt keeps the daily cadence without missing days",
+    "user_action_when_eligible": "link AdSense in YouTube Studio > Earn; autopilot will flag when thresholds approach"
+  },
   "excluded_topics": [],
   "sources": {
     "facts_bank": "facts/*.json (verified, committed before each topic is filmable)",

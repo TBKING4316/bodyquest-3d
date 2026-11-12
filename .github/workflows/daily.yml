@@ -58,6 +58,12 @@ jobs:
       - name: Setup environment + models
         run: bash runner/setup.sh
 
+      - name: Restore YouTube token (direct cloud upload)
+        env:
+          YT_TOKEN: ${{ secrets.YT_TOKEN }}
+        run: |
+          if [ -n "$YT_TOKEN" ]; then printf '%s' "$YT_TOKEN" > token.json && echo "token restored (direct upload enabled)"; else echo "no YT_TOKEN secret; hosted-link fallback"; fi
+
       - name: Produce daily Short
         env:
           BQ_FORCE_TEST: ${{ github.event.inputs.force_test }}

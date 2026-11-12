@@ -21,6 +21,7 @@ python3 -m venv "$FH/venv"
 PY="$FH/venv/bin/python"
 "$PY" -m pip install -q --upgrade pip
 "$PY" -m pip install -q numpy scipy kokoro-onnx faster-whisper
+"$PY" -m pip install -q -r "$GITHUB_WORKSPACE/requirements.txt"   # google API client for direct upload
 echo "::endgroup::"
 
 echo "::group::models (Kokoro ~340MB + Whisper small.en ~500MB)"

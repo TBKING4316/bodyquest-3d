@@ -9,3 +9,5 @@
 2026-11-12 | SYSTEM | cloud fallback built: repo (channel+state+facts bank+skill engine+runner+workflow) committed; waiting GitHub auth to push + first run | - | - | - | IN_PROGRESS
 2026-11-12 | SYSTEM | adopted youtube-master skill: channel-config.json, ledger.jsonl (2 migrated), episodes/ layout, QA gate, official-API upload path (pending client_secret.json from user; Zapier stays active meanwhile); run_daily.cmd now Mode B | - | - | - | COMPLETE
 2026-11-12 | SYSTEM | CLOUD FALLBACK VERIFIED: full render pipeline on GitHub ubuntu runner (897 frames + mix, ~14 min, 2x local speed); remaining fix: git push rebase in commit step | - | - | - | COMPLETE
+2026-11-12 | SYSTEM | official YouTube API connected: "Connected: Entertainment-with-king (UCLCWgg7WdcQ10JGh5X8XG7w)"; token.json saved (gitignored); YT_TOKEN secret set for direct cloud upload; daily.py now uploads private+publishAt from cloud | - | - | - | COMPLETE
+2026-11-12 | SYSTEM | monetization guard added to channel-config.json (YPP rules: original assets, sourced claims, honest packaging, QA gate, daily public cadence) | - | - | - | COMPLETE

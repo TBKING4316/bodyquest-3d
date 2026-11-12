@@ -1,0 +1,45 @@
+# BodyQuest 3D — channel configuration (created by youtube-master-autopilot ONBOARD, 2026-11-11)
+channel:
+  name: BodyQuest 3D
+  tagline: See What Happens Inside You.
+  niche: Science & human body "what happens if" explainers
+  language: en
+  made_for_kids: false
+  category_id: "27"          # Education
+  youtube_channel_id: UCLCWgg7WdcQ10JGh5X8XG7w   # Entertainment-with-king (from first upload)
+
+format:
+  type: short                # 9:16 vertical, <=60s auto-Short
+  length_seconds: 40         # ~90-110 word script
+  daily: true
+  upload_time: "18:00"
+  timezone: PKT              # confirm/change with user
+
+production:
+  engine: faceless-shorts
+  style: deep-dive           # 3D body/science what-if flagship style
+  voice: am_michael          # default free local voice
+  music: built-in bed
+  render_flags: SOFTWARE_GL=1 QS='&res=0.6&aa=0&shadow=1024' FPS=24   # MANDATORY on this PC: Intel HD 620 GPU path glitches black rectangles
+  temp_host: uguu            # litterbox unreachable from this network; uguu.se verified working
+
+upload:
+  provider: zapier           # YouTubeV4CLIAPI
+  visibility: private        # user reviews then publishes manually
+  notify:
+    email: [email-redacted]   # Email by Zapier, after every upload
+    whatsapp: pending-user-auth   # WhatsApp Notifications (auth URL in state/notifications.yaml)
+
+never_stop:
+  local_task: "BodyQuest 3D - Daily Autopilot"   # daily 16:00 PKT, StartWhenAvailable catch-up on boot
+  cloud_fallback: github_actions                   # produces+hosts daily at 01:00 PKT if PC produced nothing (dedupe via repo state)
+  catch_up_contract: >
+    On every run (scheduled or catch-up), BEFORE producing a new video:
+    1) read state/uploads.yaml + state/journal.md; 2) if any entry has
+    upload_pending or visibility pending, upload that file/link via Zapier first
+    (mark uploaded, private) and notify; 3) only then produce today's video if
+    state shows nothing produced today (journal.md has no DAILY line for today's
+    production date); 4) never reuse a topic marked used:true in topics.yaml.
+
+approved_by_user: true
+approved_on: 2026-11-11

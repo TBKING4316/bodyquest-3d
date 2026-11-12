@@ -1,0 +1,55 @@
+name: daily
+# BodyQuest 3D cloud fallback — produces the daily Short when the PC didn't.
+# Local PC (Task Scheduler 16:00 PKT) is the YouTube uploader of record; this run
+# renders + hosts + commits state, and the local catch-up uploads it on next boot.
+
+on:
+  schedule:
+    - cron: "0 20 * * *"   # 20:00 UTC = 01:00 PKT — after the local 16:00 PKT window
+  workflow_dispatch: {}     # manual test button
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily
+  cancel-in-progress: false
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup environment + models
+        run: bash runner/setup.sh
+
+      - name: Produce daily Short (skips if already covered)
+        env:
+          FACELESS_HOME: ${{ runner.temp }}/faceless-home
+          CHROME: /usr/bin/google-chrome
+        run: python3 runner/daily.py
+
+      - name: Commit state
+        run: |
+          git config user.name "bodyquest-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add state facts videos 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "cloud daily: $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git push
+
+      - name: Upload video artifact (30 days)
+        uses: actions/upload-artifact@v4
+        with:
+          name: video
+          path: videos/**/*.mp4
+          if-no-files-found: ignore

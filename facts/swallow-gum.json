@@ -1,0 +1,30 @@
+{
+  "slug": "swallow-gum",
+  "topic": "What happens if you swallow chewing gum?",
+  "title": "What Happens If You Swallow Chewing Gum?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "Mayo Clinic, 'Is it true that swallowed gum stays in your stomach for 7 years?' (mayoclinic.org, healthy-adult facts): gum base is indigestible, but a swallowed piece is moved through the digestive tract by normal gut motion and is excreted in stool, usually within a few days; the 7-years myth is false",
+    "Milov DE, Andres JM, Erhart NA, Bailey DJ. 'Chewing gum bezoars of the gastrointestinal tract.' Pediatrics 1998;102(2):e22 (PMID 9685468): children who swallowed gum daily (several pieces, in one case with coins) developed gum bezoars — hardened masses that caused blockages; one 4-year-old required surgical removal",
+    "Sinopidis X, Zachos K, Panagidis A, et al. 'Chewing gum bezoar as an unexpected cause of acute intestinal obstruction.' J Paediatr Child Health 2021;57(9):1533-1535 (PMID 33373485): gum bezoar causing acute intestinal obstruction in a child"
+  ],
+  "lines": [
+    { "text": "What happens if you swallow your chewing gum?", "caps": "What *happens | if you *swallow | your *gum?" },
+    { "text": "Your body can't digest it.", "caps": "Your *body | *can't | *digest it" },
+    { "text": "Gum base is a synthetic rubber your stomach ignores.", "caps": "Gum *base | is a *rubber | your *stomach | *ignores" },
+    { "text": "But ignored doesn't mean stuck.", "caps": "But *ignored | doesn't mean | *stuck" },
+    { "text": "Your gut muscles just push it through.", "caps": "Your *gut | *muscles | *push it | right *through" },
+    { "text": "One piece usually leaves within a few days.", "caps": "One *piece | usually *leaves | in a *few days" },
+    { "text": "The seven years myth is just that, a myth.", "caps": "The *7 years | myth is | just a *myth" },
+    { "text": "But swallow gum every day, and it can pile up.", "caps": "But *swallow it | *every day | and it *piles up" },
+    { "text": "Doctors have pulled out hard gum masses from kids.", "caps": "*Doctors | pulled out | *gum masses | from *kids" },
+    { "text": "Some even needed surgery for the blockage.", "caps": "Some needed | *surgery | for the *blockage" },
+    { "text": "So gum is for chewing, not swallowing.", "caps": "So *gum is | for *chewing | not *swallowing" },
+    { "text": "Your gut forgives once, not a habit.", "caps": "Your *gut | *forgives once | not a *habit" }
+  ]
+}

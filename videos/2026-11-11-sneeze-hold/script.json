@@ -1,0 +1,27 @@
+{
+  "title": "What Happens If You Hold In A Sneeze?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "Yang et al., 'Snap, crackle and pop: when sneezing leads to crackling in the neck', BMJ Case Reports 2018 (34-year-old man ruptured his pharynx by pinching his nose and closing his mouth during a sneeze; hospitalized, fed by tube, discharged after about a week)",
+    "Coverage of the BMJ 2018 case (CNN Health, 'Man bursts throat holding in a sneeze', 2018): trapped pressure 5-24x a normal sneeze, risks include ruptured eardrum, ear and sinus damage",
+    "Mayo Clinic guidance: cover sneezes with a tissue or the inside of your elbow",
+    "NIH/NIAID research summaries: a single sneeze expels thousands of respiratory droplets"
+  ],
+  "lines": [
+    { "text": "What happens if you pinch your nose and hold in a sneeze?", "caps": "What *happens | if you *hold | in a *sneeze?" },
+    { "text": "That sneeze is loaded with thousands of tiny droplets, waiting to blast out.", "caps": "It's *loaded | with *thousands | of *droplets" },
+    { "text": "But you just blocked the only exit.", "caps": "But you just | *blocked | the only *exit" },
+    { "text": "So the pressure turns around, and dives back inside your head.", "caps": "The *pressure | turns *around | dives back *inside" },
+    { "text": "It can slam into your sinuses, your ears, even your eardrums.", "caps": "Into your *sinuses | your *ears | even your *eardrums" },
+    { "text": "In 2018, one man held a sneeze so hard he tore his throat.", "caps": "One man *tore | his own *throat | holding a *sneeze" },
+    { "text": "He spent a week in the hospital, eating through a tube.", "caps": "A *week | in *hospital | fed by a *tube" },
+    { "text": "But here's the twist: your body won't give up that easily.", "caps": "But *here's | the *twist | your *body | won't give *up" },
+    { "text": "Block one sneeze, and another one is already on the way.", "caps": "Block *one | and *another | is already *coming" },
+    { "text": "So just let it out. Sneeze into your elbow, and save the pressure for something useful.", "caps": "Just *let it out | *sneeze | into your *elbow", "gap": 0.2 }
+  ]
+}

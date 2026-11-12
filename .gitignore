@@ -1,0 +1,10 @@
+# rendered media stays out of git history (videos are re-hosted + artifacted instead)
+videos/**/*.mp4
+videos/**/*.wav
+cloud_projects/
+state/autopilot.log
+review/
+*.mp4
+*.wav
+*.mp3
+__pycache__/

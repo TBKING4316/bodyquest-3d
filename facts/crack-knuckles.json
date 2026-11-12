@@ -1,0 +1,29 @@
+{
+  "slug": "crack-knuckles",
+  "topic": "What happens when you crack your knuckles?",
+  "title": "What Happens When You Crack Your Knuckles?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "Kawchuk GN, Fryer J, Jaremko JL, Zeng H, Rowe L, Thompson R. 'Real-Time Visualization of Joint Cavitation.' PLoS ONE 2015;10(4):e0119470 (doi:10.1371/journal.pone.0119470): real-time cine MRI showed the cracking sound coincides with rapid cavity INCEPTION in synovial fluid (tribonucleation), NOT collapse of a pre-existing bubble; the event lasts under 310 ms; the refractory period before a joint can crack again is about 20 minutes (Roston & Wheeler Haines 1947)",
+    "deWeber K, Olszewski M, Ortolano R. 'Knuckle cracking and hand osteoarthritis.' J Am Board Fam Med 2011;24(2):169-74 (PMID 21383216): in 215 people, no correlation between habitual knuckle cracking and hand osteoarthritis",
+    "Powers T, Kelsberg G, Safranek S. 'Clinical Inquiry: Does knuckle popping lead to arthritis?' J Fam Pract 2016;65(10):725-726 (PMID 27846331): habitual knuckle cracking over several decades is not associated with clinical or radiographic evidence of osteoarthritis"
+  ],
+  "lines": [
+    { "text": "What actually happens when you crack your knuckles?", "caps": "What *actually | *happens | when you *crack | your *knuckles?" },
+    { "text": "It's not your bones popping.", "caps": "It's *not | your *bones | *popping" },
+    { "text": "Stretch the joint, and the fluid inside instantly forms a gas cavity.", "caps": "*Stretch the *joint | and the *fluid | *instantly | forms a *cavity" },
+    { "text": "In 2015, scientists caught it live on an MRI.", "caps": "In *2015 | scientists | caught it *live | on an *MRI" },
+    { "text": "The pop is the bubble being born, not bursting.", "caps": "The *pop | is the *bubble | being *born | not *bursting" },
+    { "text": "That's why you can't crack the same knuckle for about twenty minutes.", "caps": "That's why | you *can't | crack it *again | for *20 minutes" },
+    { "text": "So does it wreck your joints?", "caps": "So does it | *wreck | your *joints?" },
+    { "text": "Researchers followed habitual crackers for years.", "caps": "*Researchers | followed | *crackers | for *years" },
+    { "text": "No link to arthritis. None.", "caps": "*No link | to *arthritis | *none" },
+    { "text": "The sound is physics, not damage.", "caps": "The *sound | is *physics | not *damage" },
+    { "text": "Now you can un-hear the myth.", "caps": "Now you can | *un-hear | the *myth" }
+  ]
+}

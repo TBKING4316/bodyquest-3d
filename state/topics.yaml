@@ -1,0 +1,30 @@
+# Topic slate — BodyQuest 3D
+# scored 0-100 (niche fit 25, freshness 20, hook 20, evidence 15, originality 10, feasibility 10)
+# refreshed: 2026-11-11 (websearch API down today; scored on evergreen demand + November seasonal fit; facts sourced at script time)
+ideas:
+  - topic: What happens if you hold in a sneeze?
+    score: 86
+    why: extreme hook + perfect x-ray 3D visual (pressure buildup) + documented medical case reports (BMJ 2018 pharynx rupture)
+    sources_pending_script: true
+    used: true
+    used_on: "2026-11-11"
+    youtube_id: OgKfUT0gGH0
+  - topic: What happens if you sleep only 5 hours a night?
+    score: 82
+    why: November seasonal fit (dark cold nights), sleep content peak demand, strong evidence base (CDC/NIH sleep science)
+    used: true
+    used_on: "2026-11-12"
+    youtube_id: 86t9S_JerWA
+  - topic: What happens when you crack your knuckles?
+    score: 80
+    why: famous myth-bust (arthritis), 2015 JAMA-affiliated study evidence, great joint x-ray visual
+    used: false
+  - topic: What happens if you swallow chewing gum?
+    score: 78
+    why: classic evergreen myth-bust, huge search demand, kid-safe, simple gut-journey visuals
+    used: false
+  - topic: What happens if you drink only cold water?
+    score: 74
+    why: seasonal (winter), calorie-burn fact, mild-evidence flag (keep claims conservative)
+    used: false
+last_refreshed: "2026-11-11"

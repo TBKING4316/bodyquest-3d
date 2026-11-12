@@ -1,0 +1,31 @@
+{
+  "slug": "cold-water",
+  "topic": "What happens if you drink only cold water?",
+  "title": "What Happens If You Drink Only Cold Water?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "Boschmann M, Steiniger J, Hille U, et al. 'Water-induced thermogenesis.' J Clin Endocrinol Metab 2003;88(12):6015-9 (PMID 14671205): drinking 500 ml of water raised resting metabolic rate by about 30% for roughly an hour",
+    "Brown CM, Dulloo AG, Montani JP. 'Water-induced thermogenesis reconsidered: the effects of osmolality and water temperature on energy expenditure after drinking.' J Clin Endocrinol Metab 2006;91(9):3598-602 (PMID 16822824): energy expenditure after drinking rises MORE when the water is cold (3 C vs 37 C)",
+    "Physics of warming: heating 500 g of ice-cold water (about 4 C) to body temperature (37 C) costs about 33 x 500 = 16.5 kcal (specific heat of water 1 kcal/kg/C); that is roughly one bite of bread (~15-25 kcal per slice of white bread, ~70-80 kcal per slice) — phrased conservatively as 'a bite of food'",
+    "Charrière N, Miles-Chan JL, Montani JP, Dulloo AG. 'Water-induced thermogenesis and fat oxidation: a reassessment.' Nutr Diabetes 2015;5(12):e190 (PMID 26690288): effect size varies between individuals; keep claims conservative"
+  ],
+  "lines": [
+    { "text": "What happens if you only drink cold water?", "caps": "What *happens | if you only | drink *cold water?" },
+    { "text": "Every glass makes your body work.", "caps": "Every *glass | makes your *body | *work" },
+    { "text": "Ice-cold water arrives near zero degrees.", "caps": "*Ice-cold | water | arrives *near zero" },
+    { "text": "Your body has to warm it to thirty-seven.", "caps": "Your *body | has to *warm it | to *37" },
+    { "text": "That big glass costs about sixteen calories.", "caps": "That big *glass | costs about | *16 calories" },
+    { "text": "And cold water revs your metabolism even harder.", "caps": "And *cold water | *revs your | *metabolism | even *harder" },
+    { "text": "Sound like a free diet hack?", "caps": "Sound like | a *free | *diet hack?" },
+    { "text": "Sixteen calories is one bite of food.", "caps": "*16 calories | is *one bite | of *food" },
+    { "text": "Your body already burns thousands a day.", "caps": "Your *body | already burns | *thousands | a *day" },
+    { "text": "So cold water won't hurt you.", "caps": "So *cold water | *won't hurt | *you" },
+    { "text": "But it won't change your body either.", "caps": "But it *won't | *change | your *body" },
+    { "text": "Tiny burn. Zero magic.", "caps": "*Tiny burn | *zero magic" }
+  ]
+}

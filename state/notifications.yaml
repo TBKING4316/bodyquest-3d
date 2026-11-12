@@ -7,8 +7,9 @@ email:
   status: ACTIVE (test sent 2026-11-11, delivered)
 whatsapp:
   app: WhatsApp Notifications (WhatsAppNotificationsCLIAPI, action send_message)
-  status: PENDING_USER_AUTH
+  status: PENDING_USER_AUTH (connections: 0 as of 2026-11-12)
   auth_url: https://mcp.zapier.com/api/v1/connect-auth/WhatsAppNotificationsCLIAPI?accountId=29202534
-  note: user must open auth URL once; template param required by Meta policy
+  note: user must open auth URL once; template "message_reminder" (New Message) fits our use; template param required by Meta policy
 publish_time: "18:00 PKT"   # confirmed by user 2026-11-12; scheduled task fires 16:00 so video is ready for review
-cloud_fallback: github_actions   # user choice 2026-11-12
+cloud_fallback: github_actions   # user choice 2026-11-12; repo TBKING4316/bodyquest-3d (private); cron 20:00 UTC
+local_sync: run_daily.cmd pulls before + pushes after every run (single ledger for dedupe)

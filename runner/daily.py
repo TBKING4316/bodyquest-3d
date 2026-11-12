@@ -171,7 +171,17 @@ def main():
     PROJECTS.mkdir(parents=True)
     run(["bash", SKILL / "scripts" / "new_video.sh", "deep-dive", slug, "--dir", PROJECTS])
     proj = PROJECTS / slug
-    shutil.copy(FACTS / f"{slug}.json", proj / "script.json")
+    if FORCE_TEST:
+        log("force test: keeping the skill's own QA'd example script + shots (machinery test only)")
+    else:
+        shutil.copy(FACTS / f"{slug}.json", proj / "script.json")
+        shots = FACTS / f"{slug}.shots.js"
+        if shots.exists():
+            shutil.copy(shots, proj / "src" / "shots.js")
+        else:
+            raise SystemExit(
+                f"[cloud] NO SHOTS for topic '{slug}': author + locally QA facts/{slug}.shots.js before a PC-off day can use it"
+            )
 
     SK = SKILL / "scripts"
     run([VENV_PY, SK / "voice.py", proj])

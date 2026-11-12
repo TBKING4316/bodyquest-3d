@@ -8,3 +8,9 @@ review/
 *.wav
 *.mp3
 __pycache__/
+# credentials — never commit (youtube-master skill rule)
+client_secret.json
+token.json
+replies.json
+episodes/**/_build/
+

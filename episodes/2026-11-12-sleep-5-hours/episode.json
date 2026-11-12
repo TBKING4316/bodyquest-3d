@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-12",
+  "slug": "sleep-5-hours",
+  "title": "What Happens If You Sleep Only 5 Hours?",
+  "style": "deep-dive-3d",
+  "pipeline": "faceless-shorts-deep-dive",
+  "status": "uploaded-private-awaiting-user-publish",
+  "video_id": "86t9S_JerWA",
+  "video_path": "videos/2026-11-12-sleep-5-hours/sleep-5-hours.mp4",
+  "duration_s": 38.9,
+  "sources": [
+    "CDC, 'About Sleep' (cdc.gov/sleep/about, May 2024): adults 18-60 need 7+ hours",
+    "NIH/NINDS, 'Brain Basics: Understanding Sleep' (Feb 2025): sleep removes brain toxins; memory filing; chronic short sleep raises cardiovascular/diabetes/depression risk",
+    "Williamson & Feyer, Occup Environ Med 2000;57:649-655 (PMC1739867): 17-19h awake equivalent to BAC 0.05%"
+  ],
+  "note": "migrated into youtube-master skill episode layout after upload; upload was via Zapier (official-API path pending client_secret.json)"
+}

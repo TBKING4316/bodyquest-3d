@@ -1,0 +1,58 @@
+{
+  "channel_name": "BodyQuest 3D",
+  "tagline": "See What Happens Inside You.",
+  "niche_hint": "human body what happens if explainers",
+  "niche_mode": "hint",
+  "niche": "Science & human body 'what happens if' explainers (3D x-ray deep-dive)",
+  "youtube_channel_id": "UCLCWgg7WdcQ10JGh5X8XG7w",
+  "pillars": [
+    "what-happens-if body scenarios",
+    "myth-busts with study evidence",
+    "daily-habit consequences (sleep, hydration, posture)",
+    "gross-but-fascinating inside stories"
+  ],
+  "audience": "worldwide English; evening viewers; curiosity-driven, sharing-friendly",
+  "language": "en",
+  "tone": "clear, curious, a little dramatic, never preachy",
+  "format": "shorts",
+  "target_length_seconds": 40,
+  "videos_per_week": 7,
+  "publish_time_utc": "13:00",
+  "publish_timezone_note": "18:00 PKT confirmed by user 2026-11-12",
+  "category_id": "27",
+  "pipelines": ["faceless-shorts-deep-dive", "slides_vo"],
+  "animation_styles": ["deep-dive-3d", "flat-motion"],
+  "render_engine": {
+    "name": "faceless-shorts (deep-dive style)",
+    "render_flags_mandatory": "SOFTWARE_GL=1 QS='&res=0.6&aa=0&shadow=1024' FPS=24",
+    "why": "Intel HD 620 GPU path glitches black rectangles; software-GL is deterministic"
+  },
+  "brand": {
+    "palette": ["#0B1016", "#EAF6FB", "#FFD43B", "#4FD1E8"],
+    "font": "Inter"
+  },
+  "voice": {
+    "provider": "kokoro-local",
+    "voice_id": "am_michael",
+    "music": "tension"
+  },
+  "upload": {
+    "auto_public": false,
+    "use_publish_at": true,
+    "publish_at_note": "videos upload private with publishAt = 18:00 PKT so the user can review first; user can say 'hold' any day to keep it private",
+    "contains_synthetic_media": false,
+    "fallback_provider": "zapier"
+  },
+  "comments": {
+    "auto_post": false,
+    "reply_categories_allowed": ["thanks", "simple-question"],
+    "escalate": ["medical", "legal", "financial", "harassment", "personal"]
+  },
+  "excluded_topics": [],
+  "sources": {
+    "facts_bank": "facts/*.json (verified, committed before each topic is filmable)",
+    "research_rule": "every claim needs a dated source (PubMed/CDC/NIH); no invented facts"
+  },
+  "approved_by_user": true,
+  "approved_on": "2026-11-11"
+}

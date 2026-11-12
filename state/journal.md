@@ -7,3 +7,4 @@
 2026-11-12 | SYSTEM | never-stop autopilot live: Task Scheduler "BodyQuest 3D - Daily Autopilot" daily 16:00 + StartWhenAvailable catch-up, logs state/autopilot.log | - | - | - | COMPLETE
 2026-11-12 | SYSTEM | notifications: email ACTIVE ([email-redacted], test delivered); WhatsApp pending user auth | - | - | - | IN_PROGRESS
 2026-11-12 | SYSTEM | cloud fallback built: repo (channel+state+facts bank+skill engine+runner+workflow) committed; waiting GitHub auth to push + first run | - | - | - | IN_PROGRESS
+2026-11-12 | SYSTEM | adopted youtube-master skill: channel-config.json, ledger.jsonl (2 migrated), episodes/ layout, QA gate, official-API upload path (pending client_secret.json from user; Zapier stays active meanwhile); run_daily.cmd now Mode B | - | - | - | COMPLETE

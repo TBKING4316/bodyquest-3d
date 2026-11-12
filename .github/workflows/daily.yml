@@ -41,6 +41,9 @@ jobs:
     if: needs.check.outputs.produce == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 300
+    env:
+      FACELESS_HOME: ${{ runner.temp }}/faceless-home   # same path for setup + produce
+      CHROME: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4
 
@@ -57,8 +60,6 @@ jobs:
 
       - name: Produce daily Short
         env:
-          FACELESS_HOME: ${{ runner.temp }}/faceless-home
-          CHROME: /usr/bin/google-chrome
           BQ_FORCE_TEST: ${{ github.event.inputs.force_test }}
         run: python3 runner/daily.py
 

@@ -32,7 +32,7 @@ jobs:
           if [ "${{ github.event.inputs.force_test }}" = "true" ]; then
             echo "produce=true" >> "$GITHUB_OUTPUT"
           else
-            P=$(python3 runner/daily.py --covered 2>/dev/null && echo false || echo true)
+            P=$(python3 runner/daily.py --covered >/dev/null 2>&1 && echo false || echo true)
             echo "produce=$P" >> "$GITHUB_OUTPUT"
           fi
 

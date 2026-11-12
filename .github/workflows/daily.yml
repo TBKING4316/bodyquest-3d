@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 300
     env:
-      FACELESS_HOME: ${{ runner.temp }}/faceless-home   # same path for setup + produce
+      FACELESS_HOME: /home/runner/bq-faceless   # same path for setup + produce (runner.home is /home/runner)
       CHROME: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4

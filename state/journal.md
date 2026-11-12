@@ -5,3 +5,5 @@
 2026-11-11 | DAILY | What happens if you hold in a sneeze? (score 86) | videos/2026-11-11-sneeze-hold/sneeze-hold.mp4 | OgKfUT0gGH0 | private | COMPLETE
 2026-11-12 | DAILY | What happens if you sleep only 5 hours a night? (score 82) | videos/2026-11-12-sleep-5-hours/sleep-5-hours.mp4 | 86t9S_JerWA | private | COMPLETE
 2026-11-12 | SYSTEM | never-stop autopilot live: Task Scheduler "BodyQuest 3D - Daily Autopilot" daily 16:00 + StartWhenAvailable catch-up, logs state/autopilot.log | - | - | - | COMPLETE
+2026-11-12 | SYSTEM | notifications: email ACTIVE ([email-redacted], test delivered); WhatsApp pending user auth | - | - | - | IN_PROGRESS
+2026-11-12 | SYSTEM | cloud fallback built: repo (channel+state+facts bank+skill engine+runner+workflow) committed; waiting GitHub auth to push + first run | - | - | - | IN_PROGRESS

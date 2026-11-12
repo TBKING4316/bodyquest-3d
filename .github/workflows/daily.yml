@@ -1,12 +1,17 @@
 name: daily
 # BodyQuest 3D cloud fallback — produces the daily Short when the PC didn't.
-# Local PC (Task Scheduler 16:00 PKT) is the YouTube uploader of record; this run
+# Local PC (Task Scheduler 16:00) is the YouTube uploader of record; this run
 # renders + hosts + commits state, and the local catch-up uploads it on next boot.
 
 on:
   schedule:
-    - cron: "0 20 * * *"   # 20:00 UTC = 01:00 PKT — after the local 16:00 PKT window
-  workflow_dispatch: {}     # manual test button
+    - cron: "0 20 * * *"   # 20:00 UTC — after the local daily window
+  workflow_dispatch:
+    inputs:
+      force_test:
+        description: "Full pipeline test with the throwaway render-test script (no state changes)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -16,7 +21,24 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      produce: ${{ steps.check.outputs.produce }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        run: |
+          if [ "${{ github.event.inputs.force_test }}" = "true" ]; then
+            echo "produce=true" >> "$GITHUB_OUTPUT"
+          else
+            P=$(python3 runner/daily.py --covered 2>/dev/null && echo false || echo true)
+            echo "produce=$P" >> "$GITHUB_OUTPUT"
+          fi
+
   produce:
+    needs: check
+    if: needs.check.outputs.produce == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 300
     steps:
@@ -33,17 +55,19 @@ jobs:
       - name: Setup environment + models
         run: bash runner/setup.sh
 
-      - name: Produce daily Short (skips if already covered)
+      - name: Produce daily Short
         env:
           FACELESS_HOME: ${{ runner.temp }}/faceless-home
           CHROME: /usr/bin/google-chrome
+          BQ_FORCE_TEST: ${{ github.event.inputs.force_test }}
         run: python3 runner/daily.py
 
       - name: Commit state
+        if: env.BQ_FORCE_TEST != 'true'
         run: |
           git config user.name "bodyquest-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add state facts videos 2>/dev/null || true
+          git add state facts 2>/dev/null || true
           git diff --cached --quiet || git commit -m "cloud daily: $(date -u +'%Y-%m-%d %H:%M') UTC"
           git push
 
@@ -51,5 +75,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: video
-          path: videos/**/*.mp4
+          path: cloud_projects/**/*.mp4
           if-no-files-found: ignore

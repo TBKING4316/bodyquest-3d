@@ -1,0 +1,20 @@
+{
+  "slug": "_render_test",
+  "topic": "RENDER TEST (throwaway — never published, never marked used)",
+  "title": "Render Test (internal)",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "Internal pipeline test script. Not for publication: validates voice -> words -> mix -> software-GL render on the cloud runner."
+  ],
+  "lines": [
+    { "text": "This is an internal render test of the pipeline.", "caps": "This is an | *internal | *render test" },
+    { "text": "The heart beats about one hundred thousand times a day.", "caps": "The *heart beats | *100,000 | times a *day" },
+    { "text": "Blood travels about twelve thousand miles.", "caps": "*Blood travels | *12,000 | *miles" },
+    { "text": "If it works, the pipeline works.", "caps": "If it *works | the *pipeline | *works" }
+  ]
+}

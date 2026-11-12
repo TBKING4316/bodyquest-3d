@@ -32,6 +32,7 @@ FACTS = ROOT / "facts"
 PROJECTS = Path(os.environ.get("BQ_PROJECTS", ROOT / "cloud_projects"))
 FH = Path(os.environ.get("FACELESS_HOME", Path.home() / ".faceless-shorts"))
 VENV_PY = FH / "venv" / "bin" / "python"
+FORCE_TEST = os.environ.get("BQ_FORCE_TEST", "").lower() in ("true", "1", "yes")
 
 
 def log(msg):
@@ -143,17 +144,26 @@ def host_video(path):
 
 
 def main():
-    covered_days = {today_pkt(), today_pkt() - timedelta(days=1)}
-    last = latest_daily_date()
-    log(f"today(PKT)={today_pkt()} latest_daily={last}")
-    if last is not None and last >= today_pkt() - timedelta(days=1):
-        log("daily video already produced (local or cloud) — nothing to do")
-        return 0
+    # --covered: cheap check for the workflow gate (exit 0 = covered/skip, 1 = produce)
+    if "--covered" in sys.argv:
+        last = latest_daily_date()
+        covered = last is not None and last >= today_pkt() - timedelta(days=1)
+        print(f"today(PKT)={today_pkt()} latest_daily={last} covered={covered}")
+        return 0 if covered else 1
 
-    topic = pick_topic()
-    fj = next(f for f in FACTS.glob("*.json") if json.loads(f.read_text(encoding="utf-8"))["topic"] == topic)
-    fj = json.loads(fj.read_text(encoding="utf-8"))
-    slug = fj["slug"]
+    if FORCE_TEST:
+        log("FORCE TEST: throwaway script, full pipeline, no state changes")
+        fj = json.loads((FACTS / "_render_test.json").read_text(encoding="utf-8"))
+        topic, slug = fj["topic"], fj["slug"]
+    else:
+        last = latest_daily_date()
+        log(f"today(PKT)={today_pkt()} latest_daily={last}")
+        if last is not None and last >= today_pkt() - timedelta(days=1):
+            log("daily video already produced (local or cloud) — nothing to do")
+            return 0
+        topic = pick_topic()
+        fj = json.loads(next(f for f in FACTS.glob("*.json") if json.loads(f.read_text(encoding="utf-8"))["topic"] == topic).read_text(encoding="utf-8"))
+        slug = fj["slug"]
     log(f"producing: {topic} (slug {slug})")
 
     if PROJECTS.exists():
@@ -161,7 +171,7 @@ def main():
     PROJECTS.mkdir(parents=True)
     run(["bash", SKILL / "scripts" / "new_video.sh", "deep-dive", slug, "--dir", PROJECTS])
     proj = PROJECTS / slug
-    shutil.copy(fj["path"] if "path" in fj else FACTS / f"{slug}.json", proj / "script.json")
+    shutil.copy(FACTS / f"{slug}.json", proj / "script.json")
 
     SK = SKILL / "scripts"
     run([VENV_PY, SK / "voice.py", proj])
@@ -175,13 +185,22 @@ def main():
     run(["node", proj / "tools" / "capture.mjs", "video", mp4], cwd=proj, env=env)
 
     dur = json.loads((proj / "data" / "lines.json").read_text())["duration"]
+    title = fj["title"]
+
+    if FORCE_TEST:
+        if os.environ.get("GITHUB_STEP_SUMMARY"):
+            with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
+                s.write("## ✅ Force test: full pipeline works on the runner\n\n")
+                s.write(f"- **Script:** {topic}\n- **Duration:** {dur:.1f}s\n- No state changes, nothing published.\n")
+        log("FORCE TEST DONE (no state changes)")
+        return 0
+
     out_dir = ROOT / "videos" / f"{today_pkt()}-{slug}"
     out_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy(mp4, out_dir / f"{slug}.mp4")
     rel = f"videos/{today_pkt()}-{slug}/{slug}.mp4"
 
     hosted = host_video(out_dir / f"{slug}.mp4")
-    title = fj["title"]
     write_state_updates(topic, title, rel, hosted or "HOSTING_FAILED_CHECK_ARTIFACT", dur)
 
     if os.environ.get("GITHUB_STEP_SUMMARY"):

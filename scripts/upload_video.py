@@ -21,6 +21,46 @@ def next_slot(hhmm):
     return t.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def occupied_slots(yt):
+    """publishAt times of this channel's future-scheduled (private) videos."""
+    now = datetime.datetime.now(datetime.timezone.utc)
+    occ = []
+    try:
+        chan = yt.channels().list(part="contentDetails", mine=True).execute()
+        up = chan["items"][0]["contentDetails"]["relatedPlaylists"].get("uploads")
+        page = None
+        while True:
+            res = yt.playlistItems().list(part="contentDetails", playlistId=up,
+                                          maxResults=50, pageToken=page).execute()
+            ids = [i["contentDetails"]["videoId"] for i in res.get("items", [])]
+            if ids:
+                for v in yt.videos().list(part="status", id=",".join(ids)).execute().get("items", []):
+                    st = v.get("status", {})
+                    if st.get("privacyStatus") == "private" and st.get("publishAt"):
+                        t = datetime.datetime.fromisoformat(st["publishAt"].replace("Z", "+00:00"))
+                        if t > now:
+                            occ.append(t)
+            page = res.get("nextPageToken")
+            if not page:
+                break
+    except Exception as e:
+        print(f"slot check degraded ({e}); using next slot blind", file=sys.stderr)
+    return occ
+
+
+def pick_free_slot(yt, hhmm):
+    """Next publish slot that is not already taken by another scheduled video."""
+    h, m = (int(x) for x in hhmm.split(":"))
+    now = datetime.datetime.now(datetime.timezone.utc)
+    t = now.replace(hour=h, minute=m, second=0, microsecond=0)
+    if t <= now + datetime.timedelta(minutes=15):
+        t += datetime.timedelta(days=1)
+    occ = occupied_slots(yt)
+    while any(abs((t - o).total_seconds()) < 3600 for o in occ):
+        t += datetime.timedelta(days=1)
+    return t.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def main():
     from googleapiclient.http import MediaFileUpload
     p = argparse.ArgumentParser()
@@ -44,7 +84,10 @@ def main():
 
     up = cfg.get("upload", {})
     public = a.public or up.get("auto_public", False)
-    publish_at = a.publish_at or (next_slot(cfg.get("publish_time_utc", "14:00")) if up.get("use_publish_at", True) else None)
+    publish_at = a.publish_at
+    if not publish_at and (public or up.get("use_publish_at", True)):
+        yt_probe = get_service()  # one connection also used for the insert below
+        publish_at = pick_free_slot(yt_probe, cfg.get("publish_time_utc", "14:00"))
 
     status = {"selfDeclaredMadeForKids": bool(meta.get("made_for_kids", False))}
     if public and not publish_at:

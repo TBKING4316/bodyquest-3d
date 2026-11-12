@@ -4,14 +4,14 @@ uploads:
   - file: videos/2026-11-11-sneeze-hold/sneeze-hold.mp4
     file_hash: 53A2D0030431FB08F98B9C59907198CB3C5335B7177E7EA4C7BF416A2532970F
     youtube_id: OgKfUT0gGH0
-    visibility: private
+    visibility: private + publishAt 2026-11-12T13:00Z (18:00 PKT)
     uploaded_at: "2026-11-11T18:26:25Z"
     channel: Entertainment-with-king (UCLCWgg7WdcQ10JGh5X8XG7w)
     title: What Happens If You Hold In A Sneeze?
   - file: videos/2026-11-12-sleep-5-hours/sleep-5-hours.mp4
     file_hash: 2649E4A2133B09CE8619A8560321E2BC66FE0D3CC998AC9C9E8017222D80DCE7
     youtube_id: 86t9S_JerWA
-    visibility: private
+    visibility: private + publishAt 2026-11-13T13:00Z (18:00 PKT)
     uploaded_at: "2026-11-11T19:41:18Z"
     channel: Entertainment-with-king (UCLCWgg7WdcQ10JGh5X8XG7w)
     title: What Happens If You Sleep Only 5 Hours?

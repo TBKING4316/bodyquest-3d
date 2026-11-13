@@ -17,3 +17,10 @@
 2026-11-12 | SYSTEM | user granted full autonomy ("fully your channel"); producing knuckles video ahead of schedule as de-risk; Mode B got skip-if-produced-ahead rule | - | - | - | COMPLETE
 2026-11-12 | SYSTEM | channel rebrand applied via API: description (AI-niche text replaced with body-niche), keywords, country PK; title/avatar/banner need Studio (brand kit generated in brand/) | - | - | - | COMPLETE
 2026-11-13 | DAILY | crack-knuckles | episodes/2026-11-13-crack-knuckles/video.mp4 | BOG831RQY3c | private+publishAt | produced_by local
+2026-11-13 | BRAND | channel NAME set to "BodyQuest 3D" via Studio automation (API-verified snippet.title) | - | - | - | COMPLETE
+2026-11-13 | BRAND | channel AVATAR uploaded via Studio (inject File into ytcp-profile-image-upload $ fileSelector + handleUpload + Publish); API shows new yt3.ggpht.com URL | - | - | - | COMPLETE
+2026-11-13 | BRAND | channel WATERMARK uploaded via Studio (ytcp-video-watermark-upload same technique, Done dialog) | - | - | - | COMPLETE
+2026-11-13 | BRAND | BANNER live via channelBanners.insert API; full API verification: title/avatar/banner/country=PK/description all confirmed; knuckles madeForKids=false category 27 | - | - | - | COMPLETE
+2026-11-13 | BRAND | handle @BodyQuest3D NOT changed: automation cannot commit (publish stays disabled; signal binding won't register; only 2 handle changes/14 days) - optional manual step for user | - | - | - | DEFERRED
+2026-11-13 | SYSTEM | Studio Settings modal (upload defaults) blocked on content load failure (flaky network); per-video settings (madeForKids=false, category 27) already cover criticals | - | - | - | DEFERRED
+2026-11-13 | SYSTEM | run_daily.cmd pinned to free model opencode/glm-5.3-flash-free (insufficient-balance failure fixed); skip-if-produced-ahead rule active | - | - | - | COMPLETE

@@ -24,3 +24,4 @@
 2026-11-13 | BRAND | handle @BodyQuest3D NOT changed: automation cannot commit (publish stays disabled; signal binding won't register; only 2 handle changes/14 days) - optional manual step for user | - | - | - | DEFERRED
 2026-11-13 | SYSTEM | Studio Settings modal (upload defaults) blocked on content load failure (flaky network); per-video settings (madeForKids=false, category 27) already cover criticals | - | - | - | DEFERRED
 2026-11-13 | SYSTEM | run_daily.cmd pinned to free model opencode/glm-5.3-flash-free (insufficient-balance failure fixed); skip-if-produced-ahead rule active | - | - | - | COMPLETE
+2026-11-13 | BACKLOG | swallow-gum shots.js authored + locally QA'd (voice 33.28s, 91/91 words, 3 sheet reviews: mass emissive/fov fix, camera pullbacks, pill copy corrected to source); claims.csv + qa.md gate files committed -> PC-off cloud production ready | - | - | - | COMPLETE

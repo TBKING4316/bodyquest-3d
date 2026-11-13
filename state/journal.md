@@ -25,3 +25,5 @@
 2026-11-13 | SYSTEM | Studio Settings modal (upload defaults) blocked on content load failure (flaky network); per-video settings (madeForKids=false, category 27) already cover criticals | - | - | - | DEFERRED
 2026-11-13 | SYSTEM | run_daily.cmd pinned to free model opencode/glm-5.3-flash-free (insufficient-balance failure fixed); skip-if-produced-ahead rule active | - | - | - | COMPLETE
 2026-11-13 | BACKLOG | swallow-gum shots.js authored + locally QA'd (voice 33.28s, 91/91 words, 3 sheet reviews: mass emissive/fov fix, camera pullbacks, pill copy corrected to source); claims.csv + qa.md gate files committed -> PC-off cloud production ready | - | - | - | COMPLETE
+2026-11-13 | BRAND | channel-wide AUDIENCE set via API: channels.update selfDeclaredMadeForKids=false (verified madeForKids=false at channel level) | - | - | - | COMPLETE
+2026-11-13 | SYSTEM | Studio Settings dialog 3rd strike: content fetch fails on this network (45s/45s/90s waits + reload); all upload defaults are set explicitly per-video by upload_video.py, so no gap remains | - | - | - | DEFERRED

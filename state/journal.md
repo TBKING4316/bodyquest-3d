@@ -16,3 +16,4 @@
 2026-11-12 | SYSTEM | crack-knuckles shots.js authored + locally QA'd (2 sheet reviews, 34 frames; 1 bad word-anchor caught by boot gate); facts bundle ready for PC-off cloud production | - | - | - | COMPLETE
 2026-11-12 | SYSTEM | user granted full autonomy ("fully your channel"); producing knuckles video ahead of schedule as de-risk; Mode B got skip-if-produced-ahead rule | - | - | - | COMPLETE
 2026-11-12 | SYSTEM | channel rebrand applied via API: description (AI-niche text replaced with body-niche), keywords, country PK; title/avatar/banner need Studio (brand kit generated in brand/) | - | - | - | COMPLETE
+2026-11-13 | DAILY | crack-knuckles | episodes/2026-11-13-crack-knuckles/video.mp4 | BOG831RQY3c | private+publishAt | produced_by local

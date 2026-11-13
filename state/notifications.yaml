@@ -5,6 +5,11 @@ email:
   to: [email-redacted]
   from_name: "BodyQuest 3D Autopilot"
   status: ACTIVE (test sent 2026-11-11, delivered)
+  instant_alerts: ACTIVE (user mandate 2026-11-13) - the moment any error/problem/issue is faced, mail [email-redacted] IMMEDIATELY with subject starting "BodyQuest 3D ALERT:"; do not wait for the daily report; include the error, attempts made, and the fix plan; retry once if the email action itself fails
+  applies_to: daily runs, cloud runs, and every interactive session
+github_actions_failures:
+  layer: second-line alert - GitHub emails failed-run notices to the account's verified email ([email-redacted]) for owned/watched repos; best-effort (user setting, not verifiable from here)
+  local_catchup: when the PC boots after a missed/offline window, run_daily.cmd uploads pending items; any failure there triggers the instant ALERT email per policy above
 whatsapp:
   app: WhatsApp Notifications (WhatsAppNotificationsCLIAPI, action send_message)
   status: DEFERRED (user decision 2026-11-12: no phone yet; will add after YouTube earnings buy one, or via a borrowed phone on request)

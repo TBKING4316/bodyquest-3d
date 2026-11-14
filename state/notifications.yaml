@@ -10,6 +10,8 @@ email:
 github_actions_failures:
   layer: second-line alert - GitHub emails failed-run notices to the account's verified email ([email-redacted]) for owned/watched repos; best-effort (user setting, not verifiable from here)
   local_catchup: when the PC boots after a missed/offline window, run_daily.cmd uploads pending items; any failure there triggers the instant ALERT email per policy above
+session_end_report:
+  policy: ACTIVE (user mandate 2026-11-14) - BEFORE a session's limit can cut it, shift work first: finish or mark PENDING, commit+push, then email [email-redacted] subject "BodyQuest 3D SESSION END" with what was done, what remains PENDING, and the watchdog ETA (<2h)
 whatsapp:
   app: WhatsApp Notifications (WhatsAppNotificationsCLIAPI, action send_message)
   status: DEFERRED (user decision 2026-11-12: no phone yet; will add after YouTube earnings buy one, or via a borrowed phone on request)

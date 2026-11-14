@@ -35,8 +35,41 @@ VENV_PY = FH / "venv" / "bin" / "python"
 FORCE_TEST = os.environ.get("BQ_FORCE_TEST", "").lower() in ("true", "1", "yes")
 
 
+ACTS = []  # every little act, for the cloud run report
+
+
 def log(msg):
+    ACTS.append(str(msg))
     print(f"[cloud] {msg}", flush=True)
+
+
+def write_cloud_report(status, topic="", title="", duration_s=None, youtube_id="", hosted_url=""):
+    """Write a full activity report to state/ (committed by the workflow).
+    The LOCAL catch-up emails every pending cloud_report_*.md to the user on next boot."""
+    ts = datetime.now(PKT).strftime("%Y-%m-%d at %H:%M PKT")
+    L = [
+        f"BODYQUEST 3D - CLOUD RUN REPORT ({status})",
+        f"Run finished: {ts}  (PC was offline; this run happened on GitHub Actions)",
+        "=" * 56,
+        "",
+        "RESULT",
+        f"  Status: {status}",
+    ]
+    if topic:
+        L.append(f"  Topic: {topic}")
+    if title:
+        L.append(f'  Title: "{title}"')
+    if duration_s is not None:
+        L.append(f"  Duration: {duration_s:.1f}s")
+    if youtube_id:
+        L.append(f"  Uploaded: private + publishAt 18:00 PKT - https://www.youtube.com/watch?v={youtube_id}")
+    elif topic:
+        L.append(f"  Direct upload: NOT completed - hosted URL: {hosted_url or '-'} (local autopilot uploads on next PC boot)")
+    L += ["", "EVERY ACTION TAKEN (chronological)"]
+    L += ["  - " + a for a in ACTS]
+    path = STATE / f"cloud_report_{datetime.now(PKT).strftime('%Y-%m-%d_%H%M')}.md"
+    path.write_text("\n".join(L) + "\n", encoding="utf-8")
+    log(f"cloud report written: {path.name}")
 
 
 def run(cmd, **kw):
@@ -217,6 +250,7 @@ def main():
         log(f"today(PKT)={today_pkt()} latest_daily={last}")
         if last is not None and last >= today_pkt() - timedelta(days=1):
             log("daily video already produced (local or cloud) — nothing to do")
+            write_cloud_report("SKIP - already covered by local PC run")
             return 0
         topic = pick_topic()
         fj = json.loads(next(f for f in FACTS.glob("*.json") if json.loads(f.read_text(encoding="utf-8"))["topic"] == topic).read_text(encoding="utf-8"))

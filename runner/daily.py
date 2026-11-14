@@ -294,6 +294,7 @@ def main():
                 s.write("## ✅ Force test: full pipeline works on the runner\n\n")
                 s.write(f"- **Script:** {topic}\n- **Duration:** {dur:.1f}s\n- No state changes, nothing published.\n")
         log("FORCE TEST DONE (no state changes)")
+        write_cloud_report("FORCE TEST SUCCESS (machinery test, no state changes)", topic=topic, duration_s=dur)
         return 0
 
     out_dir = ROOT / "videos" / f"{today_pkt()}-{slug}"
@@ -304,6 +305,8 @@ def main():
     ep_dir, vid = build_episode_and_upload(slug, title, fj.get("sources", []), out_dir / f"{slug}.mp4")
     hosted = host_video(out_dir / f"{slug}.mp4") if vid is None else ""
     write_state_updates(topic, title, rel, vid, hosted, dur)
+    write_cloud_report("SUCCESS" if vid else "PARTIAL - video produced, upload pending (hosted-link fallback)",
+                       topic=topic, title=title, duration_s=dur, youtube_id=vid or "", hosted_url=hosted)
 
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
@@ -319,4 +322,11 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except SystemExit:
+        raise
+    except Exception as e:
+        log(f"FATAL: {e!r}")
+        write_cloud_report(f"FAILURE - run crashed: {str(e)[:200]}")
+        sys.exit(1)

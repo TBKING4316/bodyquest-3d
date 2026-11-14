@@ -13,6 +13,7 @@ import json
 import re
 import sys
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 sys.path.insert(0, "scripts")
 from yt_auth import get_service  # noqa: E402
@@ -235,6 +236,114 @@ def build_weekly():
     return txt
 
 
+def build_monthly():
+    """Complete detailed month report: every video, every action, all stats."""
+    now = now_pkt()
+    month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    month_name = f"{now:%B %Y}"
+    chan, vids = fetch_youtube()
+    append_stats_history(chan)
+    now_s, old_s = stats_delta(31)
+
+    # videos whose publish date falls inside this month (publishedAt for live ones,
+    # publishAt for scheduled ones)
+    month_vids = []
+    for v in vids:
+        stamp = v.get("publishedAt") or v.get("publishAt")
+        if not stamp:
+            continue
+        try:
+            d = datetime.fromisoformat(stamp.replace("Z", "+00:00")).astimezone(PKT).replace(tzinfo=None)
+        except ValueError:
+            continue
+        if d.year == now.year and d.month == now.month:
+            month_vids.append(v)
+
+    # all journal lines of the month
+    month_lines = []
+    d = month_start
+    while d <= now:
+        month_lines += journal_lines(d.strftime("%Y-%m-%d"))
+        d += timedelta(days=1)
+
+    produced_local = [l for l in month_lines if re.match(r"^\d{4}-\d{2}-\d{2} \| DAILY ", l)]
+    produced_cloud = [l for l in month_lines if "CLOUD-DAILY" in l]
+
+    # backlog: QA'd facts bundles not yet used
+    backlog = []
+    try:
+        for f in sorted((Path(__file__).resolve().parents[1] / "facts").glob("*.shots.js")):
+            backlog.append(f.stem)
+    except OSError:
+        pass
+
+    L = []
+    L.append(f"BODYQUEST 3D - MONTHLY COMPLETE REPORT - {month_name}")
+    L.append("=" * 56)
+    L.append("")
+    L.append(f"Period: {month_start:%Y-%m-%d} to {now:%Y-%m-%d} (PKT)")
+    L.append("")
+    L.append("CHANNEL TOTALS (live from YouTube)")
+    L.append(f'  {chan["title"]} (@bodyquest_3d)')
+    L.append(f'  Subscribers: {chan["subs"]} | Total views: {chan["views"]} | Total videos: {chan["videos"]}')
+    if now_s and old_s:
+        L.append(f'  Growth over reporting window: subs {old_s["subs"]} -> {now_s["subs"]}, views {old_s["views"]} -> {now_s["views"]}')
+    L.append("")
+    L.append(f"VIDEOS OF {month_name} (every one, full stats)")
+    if month_vids:
+        for v in sorted(month_vids, key=lambda x: -x["views"]):
+            pub = v.get("publishAt")
+            if v["status"] == "private" and pub:
+                t = datetime.fromisoformat(pub.replace("Z", "+00:00")).astimezone(PKT)
+                state = f"scheduled public {t:%d %b %H:%M} PKT"
+            else:
+                state = v["status"]
+            L.append(f'  - "{v["title"]}" ({v["id"]}) | {state}')
+            L.append(f"      views {v['views']} | likes {v['likes']} | comments {v['comments']}")
+    else:
+        L.append("  (no videos were published this month)")
+    L.append("")
+    if vids:
+        top = max(vids, key=lambda v: v["views"])
+        L.append("MOST WATCHED VIDEO OF THE CHANNEL SO FAR")
+        L.append(f'  "{top["title"]}" - {top["views"]} views, {top["likes"]} likes')
+        L.append("")
+    L.append("EVERY ACTION LOGGED THIS MONTH (from journal, unedited)")
+    if month_lines:
+        for line in month_lines:
+            L.append("  " + line[:250])
+    else:
+        L.append("  (no journal lines this month)")
+    L.append("")
+    L.append("PRODUCTION MODES USED")
+    L.append(f"  - Local PC daily runs: {len(produced_local)}")
+    L.append(f"  - Cloud (PC-off) runs: {len(produced_cloud)}")
+    L.append("")
+    L.append("PROBLEMS / DEFERRALS / QA FAILURES THIS MONTH")
+    bad = [l for l in month_lines if "DEFERRED" in l or "FAIL" in l.upper() or "ALERT" in l]
+    if bad:
+        for l in bad:
+            L.append("  " + l[:250])
+    else:
+        L.append("  None logged.")
+    L.append("")
+    L.append("QA'D BACKLOG READY FOR FUTURE DAYS (facts bundles)")
+    L.append("  " + (", ".join(backlog) if backlog else "(empty)"))
+    L.append("")
+    L.append("MONETIZATION-SAFE PRACTICES IN PLACE")
+    L.append("  - made for kids: false (channel-wide + per video)")
+    L.append("  - category Education, original render + sourced claims, honest packaging")
+    L.append("  - daily cadence + QA gate before every upload")
+    L.append("")
+    L.append("SYSTEM HEALTH")
+    L.append("  - local daily task: scheduled 16:00 PKT | cloud fallback: cron 20:00 UTC")
+    L.append("  - reporting: daily + Friday weekly + 1st-of-month monthly, all emailed")
+    txt = "\n".join(L)
+    with open(ROOT + r"\state\report_monthly.md", "w", encoding="utf-8") as f:
+        f.write(txt + "\n")
+    return txt
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "daily"
-    print(build_weekly() if mode == "weekly" else build_daily())
+    print({"weekly": build_weekly, "monthly": build_monthly}.get(mode, build_daily)())

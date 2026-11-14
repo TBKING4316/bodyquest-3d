@@ -1,0 +1,30 @@
+{
+  "slug": "hold-pee",
+  "topic": "What happens if you hold in your pee?",
+  "title": "What Happens If You Hold In Your Pee?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "StatPearls, 'Urinary Retention', NCBI Bookshelf NBK538522 (updated 2024): normal bladder capacity 400-600 mL; chronic retention is defined by volumes >300 mL; long-term retention carries risk of urinary tract infection, bladder damage (detrusor changes, stones, diverticula) and chronic kidney failure; untreated obstruction can cause hydronephrosis (kidney congestion)",
+    "StatPearls, 'Bladder Rupture', NCBI Bookshelf NBK513246 (updated 2024): bladder rupture is rare; the great majority of cases follow blunt trauma (or instrumentation) on a full bladder - ordinary voluntary holding by a healthy person is not a documented cause",
+    "NIH/MedlinePlus-cited review of urinary retention (Siamoulosis/Siamoulidou 2014 classification; Wikipedia, accessed 2026-11-14): acute retention is a medical emergency; micturition urge arises from bladder-wall stretch receptors signaling the brain (micturition reflex)"
+  ],
+  "lines": [
+    { "text": "What happens if you hold in your pee?", "caps": "What *happens | if you *hold | your *pee?" },
+    { "text": "Your bladder is a stretchy muscle balloon.", "caps": "Your *bladder | is a *muscle | *balloon" },
+    { "text": "It fills up to about half a liter.", "caps": "It *fills | to about | *half a liter" },
+    { "text": "Stretch sensors scream at your brain, go now.", "caps": "*Stretch sensors | *scream | at your *brain" },
+    { "text": "Hold it once, and your body just waits.", "caps": "*Hold it *once | your *body | just *waits" },
+    { "text": "But make holding a habit, and things change.", "caps": "But *make holding | a *habit | things *change" },
+    { "text": "The wall muscle gets stretched out and weak.", "caps": "The *wall muscle | gets *stretched | out and *weak" },
+    { "text": "Stale urine lets bacteria multiply.", "caps": "*Stale | *urine | *bacteria | *multiply" },
+    { "text": "Infections can climb up toward your kidneys.", "caps": "*Infections | *climb | toward your *kidneys" },
+    { "text": "In rare extreme cases, the bladder can fail.", "caps": "*Rare extreme | *cases | the *bladder | can *fail" },
+    { "text": "And no, it won't burst from holding alone.", "caps": "It *won't | *burst | from *holding | *alone" },
+    { "text": "So when you feel the urge, just go.", "caps": "When you *feel | the *urge | just *go" }
+  ]
+}

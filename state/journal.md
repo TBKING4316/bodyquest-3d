@@ -1,5 +1,8 @@
 # Run journal — BodyQuest 3D
 # one line per run: date | mode | topic | video file | youtube id | visibility | status
+# RESUME PROTOCOL (limit-cut sessions): any sub-task left unfinished gets a line ending | PENDING
+# describing exactly what remains. The 2-hourly Continuity Watchdog (run_resume.cmd) completes
+# PENDING work, appends | COMPLETE, and pushes. Sessions must never delete PENDING lines.
 2026-11-11 | ONBOARD | niche research + identity approved (BodyQuest 3D, deep-dive, private) | - | - | - | COMPLETE
 2026-11-11 | ONBOARD | YouTube connected via Zapier (YouTubeV4CLIAPI conn 02d58ca0, auth OK) | - | - | - | COMPLETE
 2026-11-11 | DAILY | What happens if you hold in a sneeze? (score 86) | videos/2026-11-11-sneeze-hold/sneeze-hold.mp4 | OgKfUT0gGH0 | private | COMPLETE
@@ -37,3 +40,4 @@
 2026-11-14 | DAILY | swallow-gum | episodes/2026-11-14-swallow-gum/video.mp4 | ylaPmJTcXeo | private+publishAt 2026-11-15T13:00Z | COMPLETE
 2026-11-14 | PUBLISH | verified via API: Sleep (86t9S_JerWA) PUBLIC 1228 views; Knuckles (BOG831RQY3c) PUBLIC today 220 views; Swallow-gum (ylaPmJTcXeo) scheduled Nov 15 18:00 PKT | - | - | - | COMPLETE
 2026-11-14 | SYSTEM | LESSON (limit interruption): batching finish-work (wiring+tests+push) to the end made it interruptible; NEW STANDING RULE - complete+test+commit+push after EVERY sub-task, never leave finished work unpushed; nothing critical depends on a single session (daily run/cloud/reports are self-contained scripts+tasks) | - | - | - | COMPLETE
+2026-11-14 | SYSTEM | CONTINUITY WATCHDOG LIVE (user mandate: auto-shift work when limit hits): schtasks "BodyQuest 3D - Continuity Watchdog" every 2h (next 20:30 PKT) runs run_resume.cmd -> pinned free model completes any journal line ending | PENDING (resume protocol added to journal header), else exits cheap with 'nothing pending'; journal records all runs | - | - | - | COMPLETE: batching finish-work (wiring+tests+push) to the end made it interruptible; NEW STANDING RULE - complete+test+commit+push after EVERY sub-task, never leave finished work unpushed; nothing critical depends on a single session (daily run/cloud/reports are self-contained scripts+tasks) | - | - | - | COMPLETE

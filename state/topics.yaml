@@ -33,4 +33,46 @@ ideas:
     score: 74
     why: seasonal (winter), calorie-burn fact, mild-evidence flag (keep claims conservative)
     used: false
-last_refreshed: "2026-11-11"
+  # --- VIRAL SPRINT SLATE added 2026-11-15 (websearch API down; scored on evergreen demand
+  # + documented medical evidence, same scoring as the original slate. All used:false.) ---
+  - topic: What happens if you never sleep at all?
+    score: 88
+    why: extreme hook + fatal familial insomnia (real documented cases, NMJ/NCBI) - total sleep deprivation kills; peak curiosity archetype
+    used: false
+  - topic: What happens if you drink too much water?
+    score: 87
+    why: counterintuitive scare (water can kill - hyponatremia); documented marathon + water-chugging-contest deaths; perfect balance/overload x-ray visual
+    used: false
+  - topic: What happens if you sleep with your contact lenses in?
+    score: 85
+    why: fear archetype + real Pseudomonas/corneal-ulcer case reports (CDC/FDA warnings); millions of contact wearers personally affected - high share rate
+    used: false
+  - topic: What happens if you look directly at the sun?
+    score: 84
+    why: solar retinopathy - retina burn documented (NIH); eclipse Blindness stories; strong warning framing 'do not do this'
+    used: false
+  - topic: What are tonsil stones and why do they smell so bad?
+    score: 83
+    why: top gross-but-fascinating archetype; tonsilloliths documented (volatile sulfur compounds); huge search demand, people discover they have them mid-video
+    used: false
+  - topic: What happens inside when you get a brain freeze?
+    score: 80
+    why: universal experience + real mechanism (sphenopalatine ganglioneuralgia, anterior cerebral artery dilation studies); mystery-to-science structure
+    used: false
+  - topic: What happens if you hold in a fart?
+    score: 80
+    why: funny + gross + shareable; composition/absorption documented; rare spontaneous pneumoscrotum case reports give real evidence
+    used: false
+  - topic: What happens if you sneeze with your eyes open?
+    score: 78
+    why: the most argued body myth (eyes pop out - they do not; orbit anatomy); myth-bust archetype with strong comment bait 'try it'
+    used: false
+  - topic: What happens if you never wash your belly button?
+    score: 79
+    why: gross archetype; omphalolith case reports + the 2019 navel-biome study (2,300+ species); discovery moment is powerful
+    used: false
+  - topic: What happens to your body if you sit for 24 hours straight?
+    score: 76
+    why: relatable gamer/office scenario; DVT/insulin evidence documented; 'don't do this' framing fits monetization guard
+    used: false
+last_refreshed: "2026-11-15"

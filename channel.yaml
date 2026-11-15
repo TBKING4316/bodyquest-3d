@@ -11,9 +11,10 @@ channel:
 format:
   type: short                # 9:16 vertical, <=60s auto-Short
   length_seconds: 40         # ~90-110 word script
+  per_day: 2                 # VIRAL SPRINT 2026-11-15 (was 1/day)
   daily: true
-  upload_time: "18:00"
-  timezone: PKT              # confirm/change with user
+  upload_time: "public immediately"   # sprint mandate: grow fast (was private + 18:00 PKT slot; say 'review mode' to restore)
+  timezone: PKT
 
 production:
   engine: faceless-shorts

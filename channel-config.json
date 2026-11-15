@@ -16,9 +16,25 @@
   "tone": "clear, curious, a little dramatic, never preachy",
   "format": "shorts",
   "target_length_seconds": 40,
-  "videos_per_week": 7,
-  "publish_time_utc": "13:00",
-  "publish_timezone_note": "18:00 PKT confirmed by user 2026-11-12",
+  "videos_per_week": 14,
+  "publish_time_utc": "immediate-public",
+  "publish_timezone_note": "VIRAL SPRINT 2026-11-15 (user mandate 'grow it fast in 2 months'): 2 videos/day, PUBLIC immediately after QA PASS; user can say 'review mode' to restore private+18:00-PKT slots",
+  "viral_sprint": {
+    "started": "2026-11-15",
+    "goal": "1,000 subs (Path A) or 10M Shorts views/90d (Path B) in ~60 days; current pace 2.5 subs/day - sprint must raise it",
+    "uploads_per_day": 2,
+    "visibility": "public immediately after QA PASS; 'review mode' restores private+18:00 slots",
+    "topic_archetypes_ranked": [
+      "fear/health-scare with real documented case reports (sleep in contacts, staring at the sun, too much water)",
+      "gross-but-fascinating inside stories (tonsil stones, belly button stone)",
+      "famous myth-busts everyone argues about (sneeze with eyes open, 5-second rule)",
+      "body mysteries/evolution (brain freeze, goosebumps, hiccups)",
+      "extreme scenarios (never sleep, sit 24 hours, hold everything)"
+    ],
+    "hook_rule": "the stakes must be stated in the FIRST spoken second; final line ends on a specific cliffhanger or direct question to drive comments",
+    "packaging_rule": "title <=55 chars stating the stakes; thumbnail one giant recognizable element + <=3 words; never reuse the same hook structure twice in a row",
+    "quality_rule": "user flagged graphics quality 2026-11-15: prefer full-res GPU render (res=1 aa=4 shadow=2048, tested working); software-GL flags stay as fallback if GPU glitches reappear; sheet review PASS still mandatory"
+  },
   "category_id": "27",
   "pipelines": ["faceless-shorts-deep-dive", "slides_vo"],
   "animation_styles": ["deep-dive-3d", "flat-motion"],
@@ -37,9 +53,9 @@
     "music": "tension"
   },
   "upload": {
-    "auto_public": false,
-    "use_publish_at": true,
-    "publish_at_note": "videos upload private with publishAt = 18:00 PKT so the user can review first; user can say 'hold' any day to keep it private",
+    "auto_public": true,
+    "use_publish_at": false,
+    "publish_at_note": "VIRAL SPRINT 2026-11-15: videos go PUBLIC immediately after QA PASS (user mandate 'grow it fast'); publishAt slots disabled for the sprint; say 'review mode' to restore private+18:00 PKT slots",
     "contains_synthetic_media": false,
     "fallback_provider": "zapier"
   },

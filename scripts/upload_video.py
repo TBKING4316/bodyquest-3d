@@ -85,7 +85,9 @@ def main():
     up = cfg.get("upload", {})
     public = a.public or up.get("auto_public", False)
     publish_at = a.publish_at
-    if not publish_at and (public or up.get("use_publish_at", True)):
+    # FIX: --public / auto_public means publish NOW - only pick a slot when an explicit
+    # --publish-at is absent AND the upload is not meant to be immediately public.
+    if not publish_at and not public and up.get("use_publish_at", True):
         yt_probe = get_service()  # one connection also used for the insert below
         publish_at = pick_free_slot(yt_probe, cfg.get("publish_time_utc", "14:00"))
 

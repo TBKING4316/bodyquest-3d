@@ -68,7 +68,15 @@ export function buildShots(E) {
     const germs = [];
     const gMat = new THREE.MeshStandardMaterial({ color: '#4FE8B0', emissive: '#2FBF80', emissiveIntensity: 1.25 });
     for (let i = 0; i < 12; i++) { const g = new THREE.Mesh(new THREE.SphereGeometry(0.13, 12, 10), gMat); g.scale.setScalar(0.001); scene.add(g); germs.push(g); }
-    return { scene, band, urine, sensors, beads, germs, hemi, key, rim };
+    // organ detail: wall folds (deterministic pseudo-random) + drifting particles for depth
+    const R = (n) => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+    const folds = [];
+    const foldMat = new THREE.MeshStandardMaterial({ color: '#B0654E', roughness: 0.85, transparent: true, opacity: 0.5, emissive: '#6A2E1E', emissiveIntensity: 0.18 });
+    for (let i = 0; i < 8; i++) { const f = new THREE.Mesh(new THREE.TorusGeometry(2.42, 0.045 + 0.03 * R(i), 8, 40, 0.8 + 0.7 * R(i + 40)), foldMat); f.position.set((R(i + 7) * 2 - 1) * 0.7, -0.5 + R(i + 13) * 1.4, (R(i + 21) * 2 - 1) * 0.9 - 0.3); f.rotation.set(R(i + 5) * 2.4 - 1.2, R(i + 11) * 2.4 - 1.2, i * 0.8); scene.add(f); folds.push(f); }
+    const parts = [];
+    const pMat = new THREE.MeshStandardMaterial({ color: '#F2D9A0', emissive: '#C8A86A', emissiveIntensity: 0.55, transparent: true, opacity: 0.65 });
+    for (let i = 0; i < 36; i++) { const p = new THREE.Mesh(new THREE.SphereGeometry(0.024 + 0.022 * R(i + 60), 8, 6), pMat); p.userData.b = [(R(i) * 2 - 1) * 1.7, -1.3 + R(i + 3) * 2.6, (R(i + 6) * 2 - 1) * 1.3]; scene.add(p); parts.push(p); }
+    return { scene, band, urine, sensors, beads, germs, folds, parts, hemi, key, rim };
   })();
 
   const blRender = (lookAt, extra = {}) => E.render(BL.scene, cam, { ...BLOOK, focus: cam.position.distanceTo(lookAt), ...extra });
@@ -79,13 +87,14 @@ export function buildShots(E) {
   const xRender = (lookAt, extra = {}) => E.render(X.scene, cam, { ...XLOOK, focus: cam.position.distanceTo(lookAt), ...extra });
   const FACE = V3(0.1, 1.68, -0.6);
   // bladder state helper (pure per-frame)
-  const blReset = (fill = 0, sag = 0, show = 'calm') => {
+  const blReset = (fill = 0, sag = 0, show = 'calm', lt = 0) => {
     BL.band.position.y = -0.15 + 0.25 * sag; BL.band.rotation.z = 0.12 * sag;
     BL.band.scale.setScalar(1 - 0.06 * sag);
     BL.urine.scale.set(1, 0.16 + 0.5 * fill, 0.9); BL.urine.position.y = -0.95 + 0.55 * fill;
     BL.sensors.forEach((s, i) => { s.scale.setScalar(show === 'calm' || show === 'full' || show === 'sag' ? 0.7 + 0.5 * fill : 0.4); });
     BL.germs.forEach((g, i) => { g.scale.setScalar(show === 'germs' ? 0.55 + 0.45 * Math.sin(i * 1.7) : 0.001); const a = i / 12 * Math.PI * 2; g.position.set(Math.cos(a) * (0.35 + (i % 3) * 0.35), -0.35 + (i % 4) * 0.26, 0.3 + (i % 3) * 0.5); });
     BL.beads.forEach((b) => b.scale.setScalar(0.001));
+    BL.parts.forEach((p, i) => { const b = p.userData.b; p.position.set(b[0] + 0.16 * Math.sin(lt * 0.7 + i * 1.1), b[1] + 0.28 * Math.sin(lt * 0.5 + i * 1.3), b[2] + 0.16 * Math.cos(lt * 0.6 + i * 0.7)); });
   };
   // hero poses
   const holdPose = (h, k, lid = 0.3) => h.pose({ spine: [3 + 2 * k, 0, 0], head: [-6 - 2 * k, 0, 0], lid, shL: [-4, 0, 10 + 6 * k], shR: [-4, 0, 10 + 6 * k], elL: 26 + 10 * k, elR: 26 + 10 * k });
@@ -119,7 +128,7 @@ export function buildShots(E) {
   { const st = cut(2), fil = Wd('fills', 2) - st, lit = Wd('liter', 2) - st;
     add({ id: 'S03', at: st, note: 'bladder macro: urine pool rises on "fills", HALF A LITER pill on "liter"', draw(lt, d, t, blit) {
       reset(); const k = eio(clamp(seg(lt, Math.max(0.15, fil - 0.2), lit + 0.4)));
-      blReset(0.35 + 0.5 * k, 0, 'calm');
+      blReset(0.35 + 0.5 * k, 0, 'calm', lt);
       cam.position.copy(lerpV(V3(0.0, 0.55, 2.05), V3(-0.15, 0.35, 1.65), eio(lt / d))); cam.lookAt(V3(0, -0.55, 0));
       blRender(V3(0, -0.45, 0)); blit();
       label('URINE RISING', 790, 480, ...screen(BL.urine.position.clone().add(V3(0, 0.3, 0)), cam), eob(seg(lt, Math.max(0.2, fil), fil + 0.35)));
@@ -131,7 +140,7 @@ export function buildShots(E) {
   { const st = cut(3), sen = Wd('sensors', 3) - st, brn = Wd('brain', 3) - st;
     add({ id: 'S04', at: st, note: 'bladder macro: sensor dots strobe, signal beads climb the wall on "brain"', draw(lt, d, t, blit) {
       reset(); const k = eio(lt / d);
-      blReset(0.85, 0, 'full');
+      blReset(0.85, 0, 'full', lt);
       BL.sensors.forEach((s, i) => { s.material.emissiveIntensity = 0.7 + 0.9 * Math.sin(lt * 9 + i); });
       BL.beads.forEach((b, i) => { const kk = clamp(seg(lt, Math.max(0.1, sen + 0.2 + i * 0.12), brn + 0.5)); b.scale.setScalar(kk); b.position.set(lerp(-0.4, 0.5, i / 5), lerp(-0.6, 1.5, kk), 0.6); });
       cam.position.copy(lerpV(V3(0.55, -0.1, 1.55), V3(-0.3, 0.2, 1.35), k)); cam.lookAt(V3(0, -0.05, 0.2));
@@ -169,7 +178,7 @@ export function buildShots(E) {
   { const st = cut(6), wk = Wd('weak', 6) - st;
     add({ id: 'S07', at: st, note: 'bladder macro: detrusor band droops, WALL MUSCLE label, WEAK pill', draw(lt, d, t, blit) {
       reset(); const k = eio(lt / d);
-      blReset(1.0, k, 'sag');
+      blReset(1.0, k, 'sag', lt);
       BL.band.material.emissiveIntensity = 0.4 - 0.25 * k;
       cam.position.copy(lerpV(V3(0.15, -0.05, 2.05), V3(-0.2, 0.12, 1.62), k)); cam.lookAt(V3(0, 0.05, 0));
       blRender(V3(0, 0.05, 0)); blit();
@@ -181,7 +190,7 @@ export function buildShots(E) {
   // 8 · bacteria multiply (BLADDER: teal germs pop in one by one)
   { const st = cut(7), bac = Wd('bacteria', 7) - st, mlt = Wd('multiply', 7) - st;
     add({ id: 'S08', at: st, note: 'bladder macro: teal germs pop in over stale urine, MULTIPLY label', draw(lt, d, t, blit) {
-      reset(); blReset(0.9, 0.25, 'germs');
+      reset(); blReset(0.9, 0.25, 'germs', lt);
       BL.germs.forEach((g, i) => { const on = eio(clamp(seg(lt, 0.15 + i * 0.18, 0.45 + i * 0.18))); g.scale.setScalar((0.5 + 0.4 * Math.sin(i * 2.1)) * on); });
       cam.position.copy(lerpV(V3(0.05, 0.14, -1.25), V3(0.0, 0.02, -0.6), eio(lt / d))); cam.lookAt(V3(0, -0.15, 0.75));
       blRender(V3(0, -0.15, 0.75)); blit();
@@ -211,7 +220,7 @@ export function buildShots(E) {
   { const st = cut(9), fl = Wd('fail', 9) - st;
     add({ id: 'S10', at: st, note: 'bladder macro: wall dim + sagged, warning sign, RARE BUT REAL pill', draw(lt, d, t, blit) {
       reset(); const k = eio(lt / d);
-      blReset(1.0, 0.9, 'sag');
+      blReset(1.0, 0.9, 'sag', lt);
       BL.band.material.emissiveIntensity = 0.15; BL.urine.material.emissiveIntensity = 0.15;
       BL.key.intensity = 1.8 - 1.0 * k;
       cam.position.copy(lerpV(V3(-0.1, 0.1, -0.35), V3(0.12, 0.02, -0.65), k)); cam.lookAt(V3(0, 0, 0.3));

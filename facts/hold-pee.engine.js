@@ -14,17 +14,26 @@ export const W = 1080, H = 1920;
 const Q = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
 export const RES = +(Q.get('res') || 1), AA = +(Q.get('aa') ?? 4), SHADOW = +(Q.get('shadow') || 2048);
 const GRADE = {
-  uniforms: { tDiffuse: { value: null }, uBloomTex: { value: null }, uBloomAmt: { value: 1 }, uVig: { value: 0.35 }, uGrain: { value: 0.025 }, uTime: { value: 0 }, uWarm: { value: 0.04 } },
+  uniforms: { tDiffuse: { value: null }, uBloomTex: { value: null }, uBloomAmt: { value: 1 }, uVig: { value: 0.35 }, uGrain: { value: 0.015 }, uTime: { value: 0 }, uWarm: { value: 0.04 }, uTexel: { value: new THREE.Vector2(1 / 1080, 1 / 1920) }, uSharp: { value: 0.6 } },
   vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
-  fragmentShader: `uniform sampler2D tDiffuse; uniform sampler2D uBloomTex; uniform float uVig, uGrain, uTime, uWarm, uBloomAmt; varying vec2 vUv;
+  fragmentShader: `uniform sampler2D tDiffuse; uniform sampler2D uBloomTex; uniform float uVig, uGrain, uTime, uWarm, uBloomAmt, uSharp; uniform vec2 uTexel; varying vec2 vUv;
     float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233)) + uTime * 7.13) * 43758.5453); }
     // GPU driver workaround (2026-11-15): on some GPUs the bloom mip chain can emit NaN/Inf at
     // certain frames (reproduced: hold-pee t=27.5 burst frame - black rectangle). NaN poisons the
     // final color (NaN * 0 = NaN, renders black), so sanitize both inputs before use.
     vec3 clean(vec3 c, float hi){ if (c.r != c.r) c.r = 0.0; if (c.g != c.g) c.g = 0.0; if (c.b != c.b) c.b = 0.0; return min(c, vec3(hi)); }
     void main(){ vec4 c = texture2D(tDiffuse, vUv); vec2 d = vUv - 0.5; d.x *= 0.5625;
-      c.rgb = clean(c.rgb, 60000.0);
-      c.rgb += clean(texture2D(uBloomTex, vUv).rgb, 8.0) * uBloomAmt;
+      vec3 base = clean(c.rgb, 60000.0);
+      c.rgb = base + clean(texture2D(uBloomTex, vUv).rgb, 8.0) * uBloomAmt;
+      // unsharp mask (ultra-clarity): adds back the local high-pass of the SCENE (not the glow),
+      // so tiny details (sensors, folds, particles, teeth of the captions) read razor sharp.
+      vec3 avg = (clean(texture2D(tDiffuse, vUv + vec2(uTexel.x, 0.0)).rgb, 60000.0)
+                + clean(texture2D(tDiffuse, vUv - vec2(uTexel.x, 0.0)).rgb, 60000.0)
+                + clean(texture2D(tDiffuse, vUv + vec2(0.0, uTexel.y)).rgb, 60000.0)
+                + clean(texture2D(tDiffuse, vUv - vec2(0.0, uTexel.y)).rgb, 60000.0)) * 0.25;
+      vec3 hi = base - avg;
+      if (hi.r != hi.r) hi.r = 0.0; if (hi.g != hi.g) hi.g = 0.0; if (hi.b != hi.b) hi.b = 0.0;
+      c.rgb += hi * uSharp;
       c.rgb *= 1.0 - uVig * smoothstep(0.25, 0.75, length(d) * 1.4);
       c.rgb += (h(vUv * 1000.0) - 0.5) * uGrain; c.r += uWarm * 0.5; c.b -= uWarm * 0.5; gl_FragColor = c; }`,
 };
@@ -76,6 +85,7 @@ export function makeEngine(canvas, { w = W, h = H, samples = 4, shadowSize = 204
     renderer.setClearColor(this._oldClearColor, this.oldClearAlpha); renderer.autoClear = oldAutoClear;
   };
   grade.uniforms.uBloomTex.value = bloom.renderTargetsHorizontal[0].texture;
+  grade.uniforms.uTexel.value.set(1 / w, 1 / h); // sharpen operates at the INTERNAL render res (supersampled)
   return {
     renderer, envMap, composer,
     /** look = { bloom, bloomThreshold, focus (m), aperture (0 = all sharp), maxblur, exposure, vignette, grain, warm, t } */

@@ -44,8 +44,9 @@ export function buildShots(E) {
   const S = [], CUES = [], add = (o) => (S.push(o), o), cue = (t, type, o = {}) => CUES.push({ t: +t.toFixed(3), type, ...o });
   const cut = (i) => (i === 0 ? 0 : L(i) - 0.08);
   const cam = camera(30);
-  const KLOOK = { aperture: 0.003, maxblur: 0.01, bloom: 0.2 }, XLOOK = { aperture: 0.0015, bloom: 0.55, bloomThreshold: 0.4, vignette: 0.45 };
-  const BLOOK = { aperture: 0.0022, maxblur: 0.012, bloom: 0.5, bloomThreshold: 0.42, vignette: 0.55 };
+  // ultra-clarity: DOF blur cut hard (details must read sharp edge to edge, a hint of depth stays)
+  const KLOOK = { aperture: 0.0012, maxblur: 0.005, bloom: 0.2 }, XLOOK = { aperture: 0.0007, bloom: 0.55, bloomThreshold: 0.4, vignette: 0.45 };
+  const BLOOK = { aperture: 0.001, maxblur: 0.006, bloom: 0.5, bloomThreshold: 0.42, vignette: 0.55 };
 
   // ── world A · kitchen ──────────────────────────────────────────────────
   const K = SETS.kitchen(E), hero = new Human({}); hero.group.position.set(0.1, 0, -0.6); K.scene.add(hero.group);
@@ -53,10 +54,10 @@ export function buildShots(E) {
   // ── world B · x-ray stage (bladder + kidneys added into the insides) ──
   const X = SETS.xrayStage(E), xh = new Human({}), xmat = SETS.xrayMaterial(); xh.setBodyMaterial(xmat); const I = SETS.insides(); xh.spine.add(I.group); X.scene.add(xh.group);
   // the bladder (pelvic organ, organ-local coords: pelvis sits ~y -0.06 in I)
-  const bladMat = () => new THREE.MeshPhysicalMaterial({ color: '#E8D24F', emissive: '#C9B42F', emissiveIntensity: 0.85, roughness: 0.35, clearcoat: 0.8, transparent: true, opacity: 0.9 });
+  const bladMat = () => { const bt = noiseTex(256, 4, 23); bt.repeat.set(3, 2); return new THREE.MeshPhysicalMaterial({ color: '#E8D24F', emissive: '#C9B42F', emissiveIntensity: 0.85, roughness: 0.35, clearcoat: 0.8, transparent: true, opacity: 0.9, bumpMap: bt, bumpScale: 0.006 }); };
   const bladder = new THREE.Mesh(new THREE.SphereGeometry(0.052, 48, 36), bladMat()); bladder.scale.set(1.2, 1.0, 0.9); bladder.position.set(0.0, -0.05, 0.06); I.group.add(bladder);
   // kidneys (two beans, flank level) + ureters (thin tubes down to the bladder)
-  const kidMat = () => new THREE.MeshPhysicalMaterial({ color: '#D6606E', emissive: '#B23A46', emissiveIntensity: 0.4, roughness: 0.4, clearcoat: 0.6 });
+  const kidMat = () => { const kt = noiseTex(128, 3, 17); kt.repeat.set(3, 2); return new THREE.MeshPhysicalMaterial({ color: '#D6606E', emissive: '#B23A46', emissiveIntensity: 0.4, roughness: 0.4, clearcoat: 0.6, bumpMap: kt, bumpScale: 0.005 }); };
   const kid = (s) => { const g = new THREE.Group(); const b = new THREE.Mesh(new THREE.SphereGeometry(0.026, 28, 22), kidMat()); b.scale.set(0.72, 1.25, 0.62); g.add(b); return g; };
   const kidL = kid(-1), kidR = kid(1); kidL.position.set(-0.075, 0.26, -0.02); kidR.position.set(0.075, 0.26, -0.02); I.group.add(kidL, kidR);
   const ureterMat = new THREE.MeshStandardMaterial({ color: '#E8C46A', emissive: '#B8942F', emissiveIntensity: 0.35 });
@@ -72,14 +73,14 @@ export function buildShots(E) {
     const key = new THREE.DirectionalLight('#FFF0C8', 1.8); key.position.set(1.2, 1.4, 2.2); scene.add(key);
     const rim = new THREE.DirectionalLight('#E8A24F', 1.0); rim.position.set(-1.8, 0.4, -1.6); scene.add(rim);
     // stretchy wall (soft balloon, warm pink) - ultra: high tessellation + deterministic noise bump
-    const wallBump = noiseTex(256, 4, 7); wallBump.repeat.set(9, 6);
+    const wallBump = noiseTex(512, 5, 7); wallBump.repeat.set(9, 6);
     const wall = new THREE.Mesh(new THREE.SphereGeometry(2.6, 96, 64), new THREE.MeshStandardMaterial({ color: '#C88A6A', roughness: 0.72, side: THREE.BackSide, bumpMap: wallBump, bumpScale: 0.05 }));
     wall.scale.set(1, 0.85, 1.1); scene.add(wall);
     // detrusor muscle band around the wall
     const band = new THREE.Mesh(new THREE.TorusGeometry(2.35, 0.16, 24, 96), new THREE.MeshStandardMaterial({ color: '#D9707E', roughness: 0.55, emissive: '#A8404E', emissiveIntensity: 0.4 }));
     band.rotation.x = Math.PI / 2 + 0.25; scene.add(band);
     // urine pool (pale yellow-green, emissive, rises by scaling + lifting) - subtle surface ripple bump
-    const urineBump = noiseTex(128, 3, 31); urineBump.repeat.set(4, 3);
+    const urineBump = noiseTex(256, 4, 31); urineBump.repeat.set(4, 3);
     const urine = new THREE.Mesh(new THREE.SphereGeometry(2.0, 80, 48), new THREE.MeshPhysicalMaterial({ color: '#E4E86A', transparent: true, opacity: 0.55, roughness: 0.15, emissive: '#B9C22E', emissiveIntensity: 0.65, clearcoat: 1, bumpMap: urineBump, bumpScale: 0.012 }));
     urine.scale.set(1, 0.16, 0.9); urine.position.y = -0.95; scene.add(urine);
     // stretch sensors (small glowing dots on the wall)

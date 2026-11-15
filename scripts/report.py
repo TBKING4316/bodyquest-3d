@@ -133,6 +133,40 @@ def fmt_vid(v):
     return f'- "{v["title"]}" ({v["id"]}) - {state} - {v["views"]} views, {v["likes"]} likes, {v["comments"]} comments'
 
 
+def ypp_block(chan):
+    """FIRST RUPEE TRACKER - progress toward YouTube Partner Program (the only
+    point at which money can start). Honest projection from stats history."""
+    lines = [json.loads(l) for l in read(ROOT + r"\state\stats_history.jsonl").strip().splitlines() if l]
+    subs_day = views_day = 0
+    span = 0
+    if len(lines) >= 2:
+        try:
+            d0 = datetime.strptime(lines[0]["date"], "%Y-%m-%d")
+            d1 = datetime.strptime(lines[-1]["date"], "%Y-%m-%d")
+            span = max(1, (d1 - d0).days)
+            subs_day = max(0, (lines[-1]["subs"] - lines[0]["subs"]) / span)
+            views_day = max(0, (lines[-1]["views"] - lines[0]["views"]) / span)
+        except (KeyError, ValueError):
+            pass
+    subs = chan["subs"]
+    L = []
+    L.append("FIRST RUPEE TRACKER (YouTube Partner Program = when money can start)")
+    L.append("  Path A: 1,000 subs + 4,000 public watch-hours | Path B: 10M Shorts views in 90 days")
+    L.append(f"  Subscribers: {subs}/1,000 ({round(100*subs/1000)}%)")
+    L.append(f"  Lifetime views: {chan['views']}")
+    if span:
+        L.append(f"  Current pace: {subs_day:.1f} subs/day, {views_day:.0f} views/day (over last {span} days)")
+        if subs_day > 0:
+            eta = (now_pkt() + timedelta(days=(1000 - subs) / subs_day)).strftime("%d %b %Y")
+            L.append(f"  Projected 1,000-subs date at this pace: {eta}")
+        else:
+            L.append("  Projected 1,000-subs date: pace too low to project - daily uploads + sharing continue")
+    else:
+        L.append("  (need 2+ days of stats history for pace projection)")
+    L.append("  Money begins ONLY after YPP approval; AdSense linking is done on the PC (no phone needed until eligibility nears).")
+    return L
+
+
 def build_daily():
     day = now_pkt().strftime("%Y-%m-%d")
     chan, vids = fetch_youtube()
@@ -168,6 +202,8 @@ def build_daily():
     L.append("NEXT ACTIONS (automatic)")
     L.append("  - Today's video goes public at 18:00 PKT automatically (no action needed).")
     L.append("  - Tomorrow's run (16:00 PKT) produces/uploads video #4 into the next free slot.")
+    L.append("")
+    L.extend(ypp_block(chan))
     L.append("")
     L.append(f"  report generated {rec['ts']}")
     txt = "\n".join(L)
@@ -230,6 +266,8 @@ def build_weekly():
     L.append("PLAN")
     L.append("  - Daily Shorts continue at 18:00 PKT publish, 16:00 PKT production.")
     L.append("  - Facts backlog (swallow-gum etc.) keeps PC-off cloud production ready.")
+    L.append("")
+    L.extend(ypp_block(chan))
     txt = "\n".join(L)
     with open(ROOT + r"\state\report_weekly.md", "w", encoding="utf-8") as f:
         f.write(txt + "\n")
@@ -346,4 +384,8 @@ def build_monthly():
 
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "daily"
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):
+        pass
     print({"weekly": build_weekly, "monthly": build_monthly}.get(mode, build_daily)())

@@ -61,3 +61,4 @@ facebook:
     dedupe: state/uploads.yaml fb_posted flag   # never double-post
     comments: check page comments during the daily run, reply-ready items go in the daily report
     insights: Page Post Insights pulled into the weekly report
+    engagement: Question of the Week posted every Friday (run_daily step 8); first one posted manually 2026-11-15 (id 1507545225771564_122094159933559066)

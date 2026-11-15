@@ -64,6 +64,16 @@
     "user_action_when_eligible": "link AdSense in YouTube Studio > Earn; autopilot will flag when thresholds approach"
   },
   "excluded_topics": [],
+  "facebook": {
+    "enabled": true,
+    "page_name": "Body quest 3d",
+    "page_id": "1507545225771564",
+    "provider": "zapier_facebook_pages_create_page_video",
+    "post_format": "native_video_with_youtube_link_in_description",
+    "post_timing": "only_after_public_on_youtube",
+    "dedupe_field": "fb_posted in state/uploads.yaml",
+    "brand_reuse": "brand/avatar_512.jpg + brand/fb_cover.jpg (same brand as YouTube)"
+  },
   "sources": {
     "facts_bank": "facts/*.json (verified, committed before each topic is filmable)",
     "research_rule": "every claim needs a dated source (PubMed/CDC/NIH); no invented facts"

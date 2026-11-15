@@ -8,6 +8,9 @@ uploads:
     uploaded_at: "2026-11-11T18:26:25Z"
     channel: Entertainment-with-king (UCLCWgg7WdcQ10JGh5X8XG7w)
     title: What Happens If You Hold In A Sneeze?
+    fb_posted: true
+    fb_post_id: "2446975905710139"
+    fb_page: "Body quest 3d (1507545225771564)"
   - file: videos/2026-11-12-sleep-5-hours/sleep-5-hours.mp4
     file_hash: 2649E4A2133B09CE8619A8560321E2BC66FE0D3CC998AC9C9E8017222D80DCE7
     youtube_id: 86t9S_JerWA
@@ -15,6 +18,9 @@ uploads:
     uploaded_at: "2026-11-11T19:41:18Z"
     channel: Entertainment-with-king (UCLCWgg7WdcQ10JGh5X8XG7w)
     title: What Happens If You Sleep Only 5 Hours?
+    fb_posted: true
+    fb_post_id: "2613082142452526"
+    fb_page: "Body quest 3d (1507545225771564)"
   - file: episodes/2026-11-13-crack-knuckles/video.mp4
     file_hash: AA2215F45A7C3E777AF01D8E2151A058104058133A6D7616BE932D9896141AD5
     youtube_id: BOG831RQY3c
@@ -22,6 +28,9 @@ uploads:
     uploaded_at: "2026-11-13T10:23:39.243383+05:00"
     channel: Entertainment-with-king (UCLCWgg7WdcQ10JGh5X8XG7w)
     title: What Happens When You Crack Your Knuckles?
+    fb_posted: true
+    fb_post_id: "1837391687307209"
+    fb_page: "Body quest 3d (1507545225771564)"
   - file: episodes/2026-11-14-swallow-gum/video.mp4
     file_hash: 0E578DBE3CF6871D2814EBD5C534CCBB95E56D560746A004A7551138CFCCFE8A
     youtube_id: ylaPmJTcXeo
@@ -29,6 +38,7 @@ uploads:
     uploaded_at: "2026-11-14T18:19:00+05:00"
     channel: Entertainment-with-king (UCLCWgg7WdcQ10JGh5X8XG7w)
     title: What Happens If You Swallow Chewing Gum?
+    fb_posted: false  # still private until 2026-11-15T13:00Z (18:00 PKT); cross-post to Facebook on the first run after it is public
   - file: episodes/2026-11-15-hold-pee/video.mp4
     youtube_id: nroH0tg3hTY
     visibility: public (immediate, user mandate "post this time when i got more viral and grow")
@@ -36,3 +46,6 @@ uploads:
     public_at: "2026-11-15T02:16:47Z (07:16 PKT)"
     channel: Entertainment-with-king (UCLCWgg7WdcQ10JGh5X8XG7w)
     title: What Happens If You Hold In Your Pee?
+    fb_posted: true
+    fb_post_id: "1697291455329664"
+    fb_page: "Body quest 3d (1507545225771564)"

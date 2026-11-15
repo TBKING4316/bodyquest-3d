@@ -34,3 +34,6 @@ all facts sourced. Uploads go **private** first; the owner reviews and publishes
   path glitches black rectangles on some Intel iGPUs (documented in skill STYLE.md).
 - Uploads always `privacy_status: private`; `#shorts` in description; sources listed.
 - Topics are never reused; new scripts get fact-checked (PubMed/CDC/NIH) before filming.
+- **Facebook mirror (since 2026-11-15):** every video, once PUBLIC on YouTube, is also uploaded as a native
+  video to the Facebook Page "Body quest 3d" (page id 1507545225771564) via Zapier, with the YouTube link in
+  the description. Dedupe via `fb_posted` in `state/uploads.yaml`; wired into `run_daily.cmd` step (7).

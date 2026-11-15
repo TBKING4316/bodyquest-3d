@@ -8,6 +8,10 @@
 # leave half-done edits unwritten; (2) commit + push; (3) email [email-redacted] a short
 # "BodyQuest 3D SESSION END" report: what was done this session, what is PENDING, and that the
 # watchdog completes PENDING work within 2h. Sub-task granularity: journal+push after each step.
+2026-11-15 | FACEBOOK | PAGE CONNECTED: Facebook Page 'Body quest 3d' (id 1507545225771564, admin [email-redacted]) connected via Zapier; user mandate: every YouTube video must also post to Facebook daily; profile photo set to the skeleton avatar (Zapier change_profile_picture, success) | - | - | - | COMPLETE
+2026-11-15 | FACEBOOK | BACKFILL COMPLETE: 4 public YouTube videos cross-posted NATIVELY to the FB page with titles + descriptions + YT links: sneeze fb_post 2446975905710139, sleep 2613082142452526, knuckles 1837391687307209, hold-pee 1697291455329664; swallow-gum stays private until 18:00 PKT today and cross-posts on the next run after that (fb_posted:false noted in uploads.yaml) | - | - | - | COMPLETE
+2026-11-15 | FACEBOOK | AUTOMATION WIRED: run_daily.cmd step (7) cross-posts every video once it is PUBLIC on YouTube (never before) natively via Zapier create_page_video, dedupe via fb_posted in state/uploads.yaml, ALERT policy on failure; channel.yaml + channel-config.json + README updated with facebook sections; brand/fb_cover.jpg (820x312 crop of the YT banner) created | - | - | - | COMPLETE
+2026-11-15 | FACEBOOK | PENDING: page COVER photo + About text blocked via Zapier code action (sandbox appsecret_proof mismatch after page-token swap - 403/400 Graph errors); fb_cover.jpg and about text ready; needs the user's logged-in browser (browse extension) or a 2-minute manual set in Meta Business Suite | - | - | - | PENDING
 2026-11-11 | ONBOARD | niche research + identity approved (BodyQuest 3D, deep-dive, private) | - | - | - | COMPLETE
 2026-11-11 | ONBOARD | YouTube connected via Zapier (YouTubeV4CLIAPI conn 02d58ca0, auth OK) | - | - | - | COMPLETE
 2026-11-11 | DAILY | What happens if you hold in a sneeze? (score 86) | videos/2026-11-11-sneeze-hold/sneeze-hold.mp4 | OgKfUT0gGH0 | private | COMPLETE

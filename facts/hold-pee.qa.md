@@ -43,6 +43,22 @@ PUBLIC immediately when QA passes).
       visibly working in x-ray shots)
 - [x] HQ render: renders/hold-pee-hq.mp4, 778 frames @24fps, 1080x1920, NO SOFTWARE_GL,
       QS='&res=1&aa=4&shadow=2048', mix.wav muxed
+      (uploaded as 355bfOd4i08 public; superseded for quality by the MAX round below)
+
+## MAX-level round 4 (user: "extreme clear" / "max to max level"; 2026-11-15)
+- [x] Render settings pushed to GPU max: res=2 (INTERNAL 2160x3840, downscaled = 2x
+      supersampling), aa=8 (MSAA, GPU accepts it), shadow=4096
+- [x] Unsharp-mask sharpening in GRADE shader (uSharp 0.6, scene-only so glow is not sharpened;
+      NaN-safe neighbors via x!=x tests; operates at internal supersampled res, crisp after
+      downscale)
+- [x] Depth-of-field blur cut ~45% (KLOOK ap 0.003->0.0012/maxblur 0.005; XLOOK 0.0015->0.0007;
+      BLOOK 0.0022->0.001/0.006) - details read sharp edge to edge, hint of depth kept
+- [x] Film grain 0.025 -> 0.015 (cleaner fine detail)
+- [x] Bump maps (deterministic noiseTex, sin-hash lattice, NO Math.random) added: bladder wall
+      (512px, 5 octaves), urine surface ripples (256px), bladder + kidneys (small organs)
+- [x] Sheet max.jpg at res=2/aa=8/shadow=4096: 32/32 frames clean, sharpening + fine bump detail
+      visible, glitch fix holding (t=27.5 clean with glow)
+- [x] MAX render: renders/hold-pee-max.mp4, 778 frames @24fps, 1080x1920, GPU, mix.wav muxed
 
 ## Fact discipline (against sources in hold-pee.json / hold-pee.claims.csv)
 - [x] "half a liter" — StatPearls NBK538522: bladder capacity 400-600 mL (dated 2024)

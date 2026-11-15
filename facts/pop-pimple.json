@@ -1,0 +1,37 @@
+{
+  "slug": "pop-pimple",
+  "topic": "What happens if you pop a pimple?",
+  "title": "What Happens If You Pop A Pimple?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "NHS, 'Acne', Health A to Z (page last reviewed 22 September 2026): acne happens when hair follicles become blocked with excess oil and dead skin cells; bacteria can grow in blocked follicles and cause inflammation and pus; advice 'do not pick or squeeze spots because this can cause scars'; pharmacist treatments include benzoyl peroxide",
+    "Nemours KidsHealth, 'Should I Pop My Pimple?' (medically reviewed October 2018, Elana Pearl Ben-Joseph, MD): 'Squeezing can push the pus deeper into the skin, which might cause more swelling and redness. Squeezing also can lead to scabs and might leave you with permanent pits or scars.'; 'To dry a pimple up faster, apply 5% benzoyl peroxide gel or cream once or twice a day.'",
+    "Nemours KidsHealth, 'Acne' (medically reviewed November 2021, Larissa Hirsch, MD): pores become clogged by sebum and dead skin cells; bacteria multiply in the trapped sebum causing swelling and redness; a pimple forms when the pore wall opens and lets sebum, bacteria and dead skin cells under the skin; 'don't touch it, squeeze it, or pick at it' - popping causes more inflammation and permanent scars",
+    "Abrahim M, Abdelaziz N. 'Facial Erysipelas Following Pressurized Nasal Irrigation in Chronic Sinusitis: A Case Report.' Cureus 18(7):e112359 (published 9 July 2026; PMC13452730): involvement of the central facial 'danger triangle' is of particular concern because of the potential for intracranial extension through valveless venous communications with the cavernous sinus; complications (orbital cellulitis, abscess formation, septic cavernous sinus thrombosis, intracranial extension) are uncommon but carry significant morbidity",
+    "Pannu AK, Saroch A, Sharma N. 'Danger Triangle of Face and Septic Cavernous Sinus Thrombosis.' J Emerg Med 53(1):137-138 (July 2017; PMID 28408235): case report documenting septic cavernous sinus thrombosis linked to infection in the facial danger triangle"
+  ],
+  "lines": [
+    { "text": "What happens if you pop a pimple?", "caps": "What *happens | if you *pop | your *pimple?" },
+    { "text": "A pimple starts when a pore gets clogged.", "caps": "A *pimple | *starts | when a *pore | gets *clogged" },
+    { "text": "Oil and dead skin cells plug it shut.", "caps": "*Oil and | *dead skin | plug it *shut" },
+    { "text": "Bacteria slip inside and multiply.", "caps": "*Bacteria | *slip inside | and *multiply" },
+    { "text": "Your body fights back with pus.", "caps": "Your *body | *fights back | with *pus" },
+    { "text": "So you squeeze it out.", "caps": "So you *squeeze | it *out" },
+    { "text": "But squeezing pushes the pus deeper.", "caps": "But *squeezing | *pushes the pus | *deeper" },
+    { "text": "That means more swelling and redness.", "caps": "That means | more *swelling | and *redness" },
+    { "text": "And it can leave a permanent scar.", "caps": "And it *can leave | a *permanent | *scar" },
+    { "text": "There is one more reason to stop.", "caps": "There's *one more | *reason | to *stop" },
+    { "text": "The veins in this zone have no valves.", "caps": "The *veins | in this *zone | have no *valves" },
+    { "text": "They run straight toward your brain.", "caps": "They *run | straight toward | your *brain" },
+    { "text": "Infection there can very rarely spread inward.", "caps": "*Infection | very *rarely | spreads *inward" },
+    { "text": "So the real fix is patience.", "caps": "So the *real fix | is *patience" },
+    { "text": "Leave it alone, and it heals by itself.", "caps": "*Leave it *alone | it *heals | by itself" },
+    { "text": "Benzoyl peroxide dries it out faster.", "caps": "*Benzoyl peroxide | *dries it out | *faster" },
+    { "text": "Your skin will thank you.", "caps": "Your *skin | will *thank you" }
+  ]
+}

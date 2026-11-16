@@ -46,7 +46,7 @@ approved_by_user: true
 approved_on: 2026-11-11
 
 facebook:
-  enabled: true
+  enabled: false          # PAUSED 2026-11-16: connected FB account disabled (ban suspected - API dead, /me fails). Say 'facebook back' after recovery to re-enable. Lesson recorded: burst-posting a new page in <1h triggered it; on restore, pace posts hours apart.
   setup_date: "2026-11-15"
   page_name: "Body quest 3d"
   page_id: "1507545225771564"

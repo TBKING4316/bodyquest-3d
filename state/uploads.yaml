@@ -59,3 +59,13 @@ uploads:
     title: What Happens If You Hold In Your Pee? (HQ rework)
     fb_posted: false  # same topic as nroH0tg3hTY (already cross-posted) - do not double-post unless user asks
     fb_page: "Body quest 3d (1507545225771564)"
+  - file: episodes/2026-11-15-hold-pee/video.mp4
+    file_hash: 216A1BA63D47D20725811594E4822167D6027A7F633C7B75C9D152A61EFBC2BC
+    youtube_id: ex6O1GKwk_Q
+    visibility: public (immediate; MAX-level render - 2x supersample, 8x MSAA, 4096 shadows, unsharp-mask, DOF cut, bump maps; supersedes 355bfOd4i08 HQ)
+    uploaded_at: "2026-11-16T06:13:42+05:00"
+    public_at: "immediate"
+    channel: Entertainment-with-king (UCLCWgg7WdcQ10JGh5X8XG7w)
+    title: What Happens If You Hold In Your Pee? (MAX rework)
+    fb_posted: false  # topic already cross-posted on nroH0tg3hTY - no double-post
+    fb_page: "Body quest 3d (1507545225771564)"

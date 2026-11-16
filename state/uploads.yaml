@@ -69,3 +69,13 @@ uploads:
     title: What Happens If You Hold In Your Pee? (MAX rework)
     fb_posted: false  # topic already cross-posted on nroH0tg3hTY - no double-post
     fb_page: "Body quest 3d (1507545225771564)"
+  - file: episodes/2026-11-16-contact-lens/video.mp4
+    file_hash: 4DF9EC39E79DCD7F3CBD872734C24345C67C52AB891007241D1D99F46227AF58
+    youtube_id: BI2vxfFxYYA
+    visibility: public (immediate; new topic per user mandate - QA PASS before upload)
+    uploaded_at: "2026-11-16T07:30:00+05:00"
+    public_at: "immediate"
+    channel: Entertainment-with-king (UCLCWgg7WdcQ10JGh5X8XG7w)
+    title: What Happens If You Sleep In Your Contacts?
+    fb_posted: false  # facebook cross-posting PAUSED (page disabled 2026-11-15, channel.yaml enabled:false) - re-enable on user word "facebook back"
+    fb_page: "Body quest 3d (1507545225771564)"

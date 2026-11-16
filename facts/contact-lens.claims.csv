@@ -1,0 +1,8 @@
+claim,source URL,source date,confidence
+The healthy cornea has no blood vessels; it is nourished by oxygen dissolved in tears diffusing through its layers (oxygen comes from the air),https://en.wikipedia.org/wiki/Cornea,2026-11-16,high
+Corneal neovascularization (blood vessel ingrowth) is caused by deprivation of oxygen from the air - the risk raised by hypoxic conditions such as overnight contact lens wear,https://en.wikipedia.org/wiki/Cornea,2026-11-16,high
+In contact lens wearers, ~90% of infectious (microbial) keratitis cases are bacterial; Pseudomonas aeruginosa is responsible for ~40% of those bacterial cases,https://en.wikipedia.org/wiki/Keratitis,2026-11-16,high
+P. aeruginosa produces enzymes that can digest the cornea; infectious keratitis can progress rapidly (overnight-wear and tap-water exposure are documented risk practices),https://en.wikipedia.org/wiki/Keratitis,2026-11-16,high
+A corneal ulcer involves loss of epithelial tissue with stromal involvement; complications include corneal scarring, and severe cases can need corneal transplant,https://en.wikipedia.org/wiki/Cornea + https://en.wikipedia.org/wiki/Keratitis,2026-11-16,medium
+Acanthamoeba keratitis is rare (~100 US cases/yr) but nearly always associated with soft contact lens use; 89% of infected patients in a 20-yr Austrian study were lens wearers and 19% required a corneal transplant; amoebae can come from tap water,https://en.wikipedia.org/wiki/Acanthamoeba_keratitis,2026-11-16,high
+Storing/rinsing lenses in tap water is a documented risk practice (never let lenses touch tap water),https://en.wikipedia.org/wiki/Keratitis + https://en.wikipedia.org/wiki/Acanthamoeba_keratitis,2026-11-16,high

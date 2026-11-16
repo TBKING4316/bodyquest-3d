@@ -1,0 +1,30 @@
+{
+  "slug": "contact-lens",
+  "topic": "What happens if you sleep in your contact lenses?",
+  "title": "What Happens If You Sleep In Your Contacts?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "Wikipedia, 'Cornea' (accessed 2026-11-16): the healthy cornea has no blood vessels; oxygen dissolves in tears and diffuses through the cornea; corneal neovascularization is 'excessive ingrowth of blood vessels ... caused by deprivation of oxygen from the air'; corneal ulcer involves disruption of the epithelial layer with involvement of the stroma",
+    "Wikipedia, 'Keratitis' (accessed 2026-11-16): in contact lens wearers ~90% of infectious keratitis cases are bacterial, of which Pseudomonas aeruginosa is responsible for ~40%; P. aeruginosa 'produces enzymes that can digest the cornea'; infectious keratitis 'can progress rapidly'; risk practices include wearing lenses overnight or in the shower, not replacing cases, storing lenses in tap water; complications include corneal scarring, perforation, loss of the eye",
+    "Wikipedia, 'Acanthamoeba keratitis' (accessed 2026-11-16): rare (~100 US cases/yr); 'nearly always associated with soft contact lens use'; Austrian 20-yr study: 89% of infected patients were contact lens wearers, 19% required a corneal transplant; amoeba from tap water/contaminated solution survives between lens and eye; cysts hard to eradicate"
+  ],
+  "lines": [
+    { "text": "What happens if you sleep in your contact lenses?", "caps": "What *happens | if you *sleep | in your *contacts?" },
+    { "text": "Your cornea has no blood vessels.", "caps": "Your *cornea | has no | *blood vessels" },
+    { "text": "It gets its oxygen straight from the air.", "caps": "It *gets | its *oxygen | straight from the *air" },
+    { "text": "A lens plus a closed eyelid cuts that supply off.", "caps": "A *lens | plus a *closed eyelid | cuts that *off" },
+    { "text": "The surface starves, then weakens.", "caps": "The *surface | *starves | then *weakens" },
+    { "text": "Micro-tears open in the starved cornea.", "caps": "*Micro-tears | *open | in the starved cornea" },
+    { "text": "Bacteria like Pseudomonas move in.", "caps": "*Bacteria | like *Pseudomonas | move *in" },
+    { "text": "Their enzymes digest the cornea, fast.", "caps": "Their *enzymes | *digest | the cornea | *fast" },
+    { "text": "By morning, a red, painful ulcer.", "caps": "By *morning | a *red | *painful | *ulcer" },
+    { "text": "In rare cases, a scar or a corneal transplant.", "caps": "In *rare cases | a *scar | or a *transplant" },
+    { "text": "So take your lenses out before bed, every time.", "caps": "So *take them out | before *bed | *every time" },
+    { "text": "And never let them touch tap water.", "caps": "And *never | let them *touch | tap *water" }
+  ]
+}

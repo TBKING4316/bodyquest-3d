@@ -43,13 +43,13 @@ def log(msg):
     print(f"[cloud] {msg}", flush=True)
 
 
-def write_cloud_report(status, topic="", title="", duration_s=None, youtube_id="", hosted_url=""):
+def write_cloud_report(status, topic="", title="", duration_s=None, youtube_id="", hosted_url="", slot=""):
     """Write a full activity report to state/ (committed by the workflow).
     The LOCAL catch-up emails every pending cloud_report_*.md to the user on next boot."""
     ts = datetime.now(PKT).strftime("%Y-%m-%d at %H:%M PKT")
     L = [
         f"BODYQUEST 3D - CLOUD RUN REPORT ({status})",
-        f"Run finished: {ts}  (PC was offline; this run happened on GitHub Actions)",
+        f"Run finished: {ts}  (this run happened on GitHub Actions)",
         "=" * 56,
         "",
         "RESULT",
@@ -62,7 +62,7 @@ def write_cloud_report(status, topic="", title="", duration_s=None, youtube_id="
     if duration_s is not None:
         L.append(f"  Duration: {duration_s:.1f}s")
     if youtube_id:
-        L.append(f"  Uploaded: private + publishAt 18:00 PKT - https://www.youtube.com/watch?v={youtube_id}")
+        L.append(f"  Uploaded: private + publishAt {slot or 'next free evening slot'} - https://www.youtube.com/watch?v={youtube_id}")
     elif topic:
         L.append(f"  Direct upload: NOT completed - hosted URL: {hosted_url or '-'} (local autopilot uploads on next PC boot)")
     L += ["", "EVERY ACTION TAKEN (chronological)"]
@@ -91,15 +91,19 @@ def latest_daily_date():
 
 
 def pick_topic():
-    """Highest-score topic with used:false that has a facts file. Returns (topic, facts)."""
+    """Highest-score topic with used:false that has BOTH facts/<slug>.json AND facts/<slug>.shots.js.
+    Returns (topic, facts_path). Topics missing shots.js are skipped with a log line."""
     text = (STATE / "topics.yaml").read_text(encoding="utf-8")
     # simple block parse: topic line, then score, used fields within the block
     blocks = re.split(r"\n(?=  - topic:)", text)
     candidates = []
     facts = {}
     for f in FACTS.glob("*.json"):
-        j = json.loads(f.read_text(encoding="utf-8"))
-        facts[j["topic"]] = j
+        try:
+            j = json.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        facts[j["topic"]] = f
     for b in blocks:
         m = re.match(r"  - topic: (.+)", b)
         if not m:
@@ -107,19 +111,46 @@ def pick_topic():
         topic = m.group(1).strip()
         if re.search(r"\n    used: true", b):
             continue
+        if re.search(r"\n    claimed_by:", b):
+            continue  # claimed by an interactive session - it owns the topic
         sm = re.search(r"\n    score: (\d+)", b)
         score = int(sm.group(1)) if sm else 0
-        if topic in facts:
-            candidates.append((score, topic))
-        else:
+        if topic not in facts:
             log(f"topic has no facts file yet, skipping: {topic} (score {score})")
+            continue
+        slug = facts[topic].stem
+        if not (FACTS / f"{slug}.shots.js").exists():
+            log(f"topic has no QA'd shots.js yet, skipping: {topic} (score {score}) - author facts/{slug}.shots.js")
+            continue
+        candidates.append((score, topic))
     if not candidates:
-        raise SystemExit("[cloud] NO USABLE TOPIC: slate empty or no facts files — add one to facts/")
+        raise LookupError("NO READY TOPIC: no unused topic has both facts/<slug>.json and facts/<slug>.shots.js - author one")
     candidates.sort(reverse=True)
-    return candidates[0][1]
+    return candidates[0][1], facts[candidates[0][1]]
 
 
-def write_state_updates(topic, title, video_rel, youtube_id, hosted_url, duration_s):
+def produced_today():
+    """Number of videos produced/uploaded today (PKT) = uploads.yaml entries with today's
+    uploaded_at date. Both local and cloud runs append there, so this is the shared quota counter."""
+    today = today_pkt().isoformat()
+    n = 0
+    up = (STATE / "uploads.yaml")
+    if up.exists():
+        for m in re.finditer(r'uploaded_at: "(\d{4}-\d{2}-\d{2})', up.read_text(encoding="utf-8")):
+            if m.group(1) == today:
+                n += 1
+    return n
+
+
+def daily_quota():
+    try:
+        cfg = json.loads((ROOT / "channel-config.json").read_text(encoding="utf-8"))
+        return int(cfg.get("uploads_per_day", 2))
+    except Exception:
+        return 2
+
+
+def write_state_updates(topic, title, video_rel, youtube_id, hosted_url, duration_s, slot=""):
     """topics.yaml (used) + uploads.yaml + journal.md (CLOUD-DAILY line)."""
     now_iso = datetime.now(PKT).isoformat()
     today = today_pkt().isoformat()
@@ -139,7 +170,7 @@ def write_state_updates(topic, title, video_rel, youtube_id, hosted_url, duratio
     up += (
         f"  - file: {video_rel}\n"
         f"    youtube_id: {youtube_id or 'PENDING_UPLOAD'}\n"
-        f"    visibility: {'private (publishAt scheduled)' if uploaded else 'pending_upload_local'}\n"
+        f"    visibility: {'private (publishAt ' + slot + ')' if uploaded and slot else 'pending_upload_local'}\n"
         f"    hosted_url: {hosted_url or '-'}\n"
         f"    uploaded_at: \"{now_iso}\"\n"
         f"    produced_by: cloud\n"
@@ -149,8 +180,8 @@ def write_state_updates(topic, title, video_rel, youtube_id, hosted_url, duratio
 
     j = (STATE / "journal.md").read_text(encoding="utf-8")
     j += (
-        f"{today} | CLOUD-DAILY | {topic} (cloud fallback, PC off) | {video_rel} "
-        f"| {youtube_id or 'PENDING_UPLOAD'} | {'private+publishAt' if uploaded else 'pending_upload_local'} "
+        f"{today} | CLOUD-DAILY | {topic} (cloud render+upload) | {video_rel} "
+        f"| {youtube_id or 'PENDING_UPLOAD'} | {('private+publishAt ' + slot) if uploaded else 'pending_upload_local'} "
         f"| {duration_s:.1f}s hosted: {hosted_url or '-'}\n"
     )
     (STATE / "journal.md").write_text(j, encoding="utf-8")
@@ -190,25 +221,26 @@ def build_episode_and_upload(slug, title, sources, mp4):
     (ep_dir / "qa.md").write_text(qa, encoding="utf-8")
     if failed:
         log(f"QA FAIL: {failed}")
-        return ep_dir, None
+        return ep_dir, None, None
 
     token = ROOT / "token.json"
     if not token.exists():
         log("no token.json — direct upload unavailable, staying on hosted-link fallback")
-        return ep_dir, None
+        return ep_dir, None, None
     try:
-        log("uploading via official YouTube API (private + publishAt)...")
+        log("uploading via official YouTube API (private + next free evening slot)...")
         up = subprocess.run(["python3", "scripts/upload_video.py", "--episode", str(ep_dir)],
                             cwd=ROOT, capture_output=True, text=True, timeout=1800)
         if up.returncode != 0:
             log(f"upload_video.py failed: {up.stdout[-400:]} {up.stderr[-400:]}")
-            return ep_dir, None
-        vid = json.loads(up.stdout.strip().splitlines()[-1])["video_id"]
-        log(f"uploaded: {vid}")
-        return ep_dir, vid
+            return ep_dir, None, None
+        out = json.loads(up.stdout.strip().splitlines()[-1])
+        vid = out["video_id"]
+        log(f"uploaded: {vid} (publishAt {out.get('publish_at') or 'immediate'})")
+        return ep_dir, vid, out.get("publish_at")
     except Exception as e:
         log(f"upload error: {e}")
-        return ep_dir, None
+        return ep_dir, None, None
 
 
 def host_video(path):
@@ -236,9 +268,16 @@ def host_video(path):
 def main():
     # --covered: cheap check for the workflow gate (exit 0 = covered/skip, 1 = produce)
     if "--covered" in sys.argv:
-        last = latest_daily_date()
-        covered = last is not None and last >= today_pkt() - timedelta(days=1)
-        print(f"today(PKT)={today_pkt()} latest_daily={last} covered={covered}")
+        q = daily_quota()
+        n = produced_today()
+        try:
+            pick_topic()
+            ready = True
+        except LookupError as e:
+            ready = False
+            print(f"no ready topic: {e}")
+        covered = n >= q or not ready
+        print(f"today(PKT)={today_pkt()} produced_today={n}/{q} ready_topic={ready} covered={covered}")
         return 0 if covered else 1
 
     if FORCE_TEST:
@@ -246,14 +285,20 @@ def main():
         fj = json.loads((FACTS / "_render_test.json").read_text(encoding="utf-8"))
         topic, slug = fj["topic"], fj["slug"]
     else:
-        last = latest_daily_date()
-        log(f"today(PKT)={today_pkt()} latest_daily={last}")
-        if last is not None and last >= today_pkt() - timedelta(days=1):
-            log("daily video already produced (local or cloud) — nothing to do")
-            write_cloud_report("SKIP - already covered by local PC run")
+        q = daily_quota()
+        n = produced_today()
+        log(f"today(PKT)={today_pkt()} produced_today={n}/{q}")
+        if n >= q:
+            log("daily quota already met - nothing to do")
+            write_cloud_report(f"SKIP - daily quota met ({n}/{q} videos produced today)")
             return 0
-        topic = pick_topic()
-        fj = json.loads(next(f for f in FACTS.glob("*.json") if json.loads(f.read_text(encoding="utf-8"))["topic"] == topic).read_text(encoding="utf-8"))
+        try:
+            topic, fj_path = pick_topic()
+        except LookupError as e:
+            log(f"SKIP: {e}")
+            write_cloud_report(f"SKIP - no ready topic (needs facts/<slug>.json + facts/<slug>.shots.js authored)")
+            return 0
+        fj = json.loads(fj_path.read_text(encoding="utf-8"))
         slug = fj["slug"]
     log(f"producing: {topic} (slug {slug})")
 
@@ -280,7 +325,10 @@ def main():
     run(["node", proj / "tools" / "capture.mjs", "cues"], cwd=proj)
     run([VENV_PY, proj / "tools" / "mix.py", proj])
 
-    env = {**os.environ, "SOFTWARE_GL": "1", "QS": "&res=0.6&aa=0&shadow=1024", "FPS": "24",
+    # HQ cloud tier (user quality mandate 2026-11-15; res=1 native 1080x1920, MSAA, real shadows).
+    # MAX (res=2) stays a local-GPU option: SwiftShader 2-core would exceed sane run times.
+    qs = os.environ.get("BQ_QS", "&res=1&aa=4&shadow=2048")
+    env = {**os.environ, "SOFTWARE_GL": "1", "QS": qs, "FPS": "24",
            "CHROME": os.environ.get("CHROME", "/usr/bin/google-chrome")}
     mp4 = proj / "renders" / f"{slug}.mp4"
     run(["node", proj / "tools" / "capture.mjs", "video", mp4], cwd=proj, env=env)
@@ -302,18 +350,18 @@ def main():
     shutil.copy(mp4, out_dir / f"{slug}.mp4")
     rel = f"videos/{today_pkt()}-{slug}/{slug}.mp4"
 
-    ep_dir, vid = build_episode_and_upload(slug, title, fj.get("sources", []), out_dir / f"{slug}.mp4")
+    ep_dir, vid, slot = build_episode_and_upload(slug, title, fj.get("sources", []), out_dir / f"{slug}.mp4")
     hosted = host_video(out_dir / f"{slug}.mp4") if vid is None else ""
-    write_state_updates(topic, title, rel, vid, hosted, dur)
+    write_state_updates(topic, title, rel, vid, hosted, dur, slot=slot or "")
     write_cloud_report("SUCCESS" if vid else "PARTIAL - video produced, upload pending (hosted-link fallback)",
-                       topic=topic, title=title, duration_s=dur, youtube_id=vid or "", hosted_url=hosted)
+                       topic=topic, title=title, duration_s=dur, youtube_id=vid or "", hosted_url=hosted, slot=slot or "")
 
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
-            s.write("## ✅ Cloud daily run complete (PC was off)\n\n")
+            s.write("## ✅ Cloud production run complete\n\n")
             s.write(f"- **Topic:** {topic}\n- **Title:** {title}\n- **Duration:** {dur:.1f}s\n")
             if vid:
-                s.write(f"- **Uploaded via official API:** private + publishAt 18:00 PKT — https://www.youtube.com/watch?v={vid}\n")
+                s.write(f"- **Uploaded via official API:** private + publishAt {slot or '(next free slot)'} — https://www.youtube.com/watch?v={vid}\n")
             else:
                 s.write(f"- **Hosted URL (72h/3h):** {hosted or 'FAILED — download the artifact'}\n")
                 s.write("- Status: pending; the local autopilot uploads it on next PC boot\n")

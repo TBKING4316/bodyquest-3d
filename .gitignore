@@ -12,5 +12,6 @@ __pycache__/
 client_secret.json
 token.json
 replies.json
+state/private.yaml
 episodes/**/_build/
 

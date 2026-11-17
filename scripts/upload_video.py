@@ -8,17 +8,43 @@ publishAt, so the user reviews before anything goes live. Public is only used wh
 config sets upload.auto_public = true (the user's own choice) or --public is passed.
 Prints one JSON line with the video id. Never prints credentials.
 """
-import argparse, datetime, json, os, sys
+import argparse, datetime, json, os, re, sys
 from yt_auth import get_service
 
 
-def next_slot(hhmm):
+def parse_slots(cfg):
+    """Publish slots (UTC 'HH:MM') from config: publish_slots_utc list, else publish_time_utc."""
+    raw = cfg.get("publish_slots_utc") or [cfg.get("publish_time_utc", "14:00")]
+    return sorted(str(x) for x in raw if re.match(r"^\d{1,2}:\d{2}$", str(x)))
+
+
+def slot_time(now, hhmm, days_ahead=0):
     h, m = (int(x) for x in hhmm.split(":"))
+    t = now.replace(hour=h, minute=m, second=0, microsecond=0) + datetime.timedelta(days=days_ahead)
+    return t
+
+
+def next_free_slot(yt, slots):
+    """Next publish slot (from the configured evening slot list) not already taken."""
     now = datetime.datetime.now(datetime.timezone.utc)
-    t = now.replace(hour=h, minute=m, second=0, microsecond=0)
-    if t <= now + datetime.timedelta(minutes=15):
-        t += datetime.timedelta(days=1)
-    return t.strftime("%Y-%m-%dT%H:%M:%SZ")
+    if not slots:
+        slots = ["14:00"]
+    occ = occupied_slots(yt) if yt is not None else []
+    for day in range(0, 15):
+        for hhmm in slots:
+            t = slot_time(now, hhmm, day)
+            if t <= now + datetime.timedelta(minutes=20):
+                continue
+            if any(abs((t - o).total_seconds()) < 3300 for o in occ):
+                continue
+            return t.strftime("%Y-%m-%dT%H:%M:%SZ")
+    # fully booked for 2 weeks (should not happen) - force a slot 2 days out
+    return slot_time(now, slots[-1], 2).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def next_slot(hhmm):
+    """Single-slot legacy helper (no yt connection needed)."""
+    return next_free_slot(None, [hhmm])
 
 
 def occupied_slots(yt):
@@ -49,16 +75,8 @@ def occupied_slots(yt):
 
 
 def pick_free_slot(yt, hhmm):
-    """Next publish slot that is not already taken by another scheduled video."""
-    h, m = (int(x) for x in hhmm.split(":"))
-    now = datetime.datetime.now(datetime.timezone.utc)
-    t = now.replace(hour=h, minute=m, second=0, microsecond=0)
-    if t <= now + datetime.timedelta(minutes=15):
-        t += datetime.timedelta(days=1)
-    occ = occupied_slots(yt)
-    while any(abs((t - o).total_seconds()) < 3600 for o in occ):
-        t += datetime.timedelta(days=1)
-    return t.strftime("%Y-%m-%dT%H:%M:%SZ")
+    """Legacy single-slot API (schedule_videos.py)."""
+    return next_free_slot(yt, [hhmm])
 
 
 def main():
@@ -89,7 +107,9 @@ def main():
     # --publish-at is absent AND the upload is not meant to be immediately public.
     if not publish_at and not public and up.get("use_publish_at", True):
         yt_probe = get_service()  # one connection also used for the insert below
-        publish_at = pick_free_slot(yt_probe, cfg.get("publish_time_utc", "14:00"))
+        publish_at = next_free_slot(yt_probe, parse_slots(cfg))
+        if publish_at:
+            print(f"slot: publishAt {publish_at}", file=sys.stderr)
 
     status = {"selfDeclaredMadeForKids": bool(meta.get("made_for_kids", False))}
     if public and not publish_at:

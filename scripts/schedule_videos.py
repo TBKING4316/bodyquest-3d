@@ -10,7 +10,7 @@ Never prints credentials.
 """
 import argparse, json, os, sys
 from yt_auth import get_service
-from upload_video import pick_free_slot
+from upload_video import next_free_slot, pick_free_slot
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,8 +22,9 @@ def main():
     a = p.parse_args()
 
     cfg = json.load(open(os.path.join(ROOT, "channel-config.json"), encoding="utf-8"))
-    hhmm = cfg.get("publish_time_utc", "13:00")
+    from upload_video import parse_slots
     yt = get_service()
+    slots = parse_slots(cfg) or ["13:00"]
 
     for vid in a.video_ids:
         cur = yt.videos().list(part="status", id=vid).execute()
@@ -42,7 +43,7 @@ def main():
             if status.get("privacyStatus") != "private":
                 print(json.dumps({"video_id": vid, "error": f"privacyStatus={status.get('privacyStatus')}, refusing to touch"}))
                 continue
-            status["publishAt"] = pick_free_slot(yt, hhmm)
+            status["publishAt"] = pick_free_slot(yt, slots[0]) if len(slots) == 1 else next_free_slot(yt, slots)
             action = "scheduled"
 
         yt.videos().update(part="status", body={"id": vid, "status": status}).execute()

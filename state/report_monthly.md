@@ -27,7 +27,7 @@ EVERY ACTION LOGGED THIS MONTH (from journal, unedited)
   2026-11-11 | DAILY | What happens if you hold in a sneeze? (score 86) | videos/2026-11-11-sneeze-hold/sneeze-hold.mp4 | OgKfUT0gGH0 | private | COMPLETE
   2026-11-12 | DAILY | What happens if you sleep only 5 hours a night? (score 82) | videos/2026-11-12-sleep-5-hours/sleep-5-hours.mp4 | 86t9S_JerWA | private | COMPLETE
   2026-11-12 | SYSTEM | never-stop autopilot live: Task Scheduler "BodyQuest 3D - Daily Autopilot" daily 16:00 + StartWhenAvailable catch-up, logs state/autopilot.log | - | - | - | COMPLETE
-  2026-11-12 | SYSTEM | notifications: email ACTIVE ([email-redacted], test delivered); WhatsApp pending user auth | - | - | - | IN_PROGRESS
+  2026-11-12 | SYSTEM | notifications: email ACTIVE ([report-email], test delivered); WhatsApp pending user auth | - | - | - | IN_PROGRESS
   2026-11-12 | SYSTEM | cloud fallback built: repo (channel+state+facts bank+skill engine+runner+workflow) committed; waiting GitHub auth to push + first run | - | - | - | IN_PROGRESS
   2026-11-12 | SYSTEM | adopted youtube-master skill: channel-config.json, ledger.jsonl (2 migrated), episodes/ layout, QA gate, official-API upload path (pending client_secret.json from user; Zapier stays active meanwhile); run_daily.cmd now Mode B | 
   2026-11-12 | SYSTEM | CLOUD FALLBACK VERIFIED: full render pipeline on GitHub ubuntu runner (897 frames + mix, ~14 min, 2x local speed); remaining fix: git push rebase in commit step | - | - | - | COMPLETE
@@ -52,7 +52,7 @@ EVERY ACTION LOGGED THIS MONTH (from journal, unedited)
   2026-11-13 | SYSTEM | Studio recipes proven: (a) settings content ONLY readable via shadow-piercing deepText on ytcp-settings-dialog; (b) save works even with stray "Oops/Retry" banner; (c) customization page (/editing/details) loads directly without
   2026-11-13 | BRAND | upload defaults SAVED successfully (Settings dialog "All changes saved." toast + dialog closed): desc 0/5000, tags human body/science facts/what happens if/3d animation/education, visibility Private, language English US, category
   2026-11-13 | SYSTEM | REPORTING SYSTEM LIVE: scripts/report.py (daily+weekly, live YouTube stats, stats_history.jsonl for week-over-week deltas); run_daily.cmd step (6b) emails report_daily.md via Zapier after every run (+ report_weekly.md on Fridays
-  2026-11-13 | SYSTEM | INSTANT ALERT POLICY (user mandate): any error/problem/issue -> immediate email to [email-redacted] with subject "BodyQuest 3D ALERT: ..." (error + attempts + fix plan), never deferred to daily report; wired into run_daily.c
+  2026-11-13 | SYSTEM | INSTANT ALERT POLICY (user mandate): any error/problem/issue -> immediate email to [report-email] with subject "BodyQuest 3D ALERT: ..." (error + attempts + fix plan), never deferred to daily report; wired into run_daily.c
   2026-11-13 | SYSTEM | CLOUD FALLBACK RE-VERIFIED: gh run list shows schedule trigger 2026-11-13T00:50Z success (correctly skipped, local covered) + 2026-11-12 workflow_dispatch full-pipeline success 20m; user mandate renewed: never stop even if PC of
   2026-11-13 | BRAND | AVATAR CORRECTION: prior session's avatar change had NOT actually taken (image at the "new" URL still showed old Entertainment-with-king logo — caught by downloading + visually inspecting the image; user was right). Root cause: U
   2026-11-14 | DAILY | swallow-gum | episodes/2026-11-14-swallow-gum/video.mp4 | ylaPmJTcXeo | private+publishAt 2026-11-15T13:00Z | COMPLETE
@@ -65,7 +65,7 @@ PROBLEMS / DEFERRALS / QA FAILURES THIS MONTH
   2026-11-13 | BRAND | handle @BodyQuest3D NOT changed: automation cannot commit (publish stays disabled; signal binding won't register; only 2 handle changes/14 days) - optional manual step for user | - | - | - | DEFERRED
   2026-11-13 | SYSTEM | Studio Settings modal (upload defaults) blocked on content load failure (flaky network); per-video settings (madeForKids=false, category 27) already cover criticals | - | - | - | DEFERRED
   2026-11-13 | SYSTEM | run_daily.cmd pinned to free model opencode/glm-5.3-flash-free (insufficient-balance failure fixed); skip-if-produced-ahead rule active | - | - | - | COMPLETE
-  2026-11-13 | SYSTEM | INSTANT ALERT POLICY (user mandate): any error/problem/issue -> immediate email to [email-redacted] with subject "BodyQuest 3D ALERT: ..." (error + attempts + fix plan), never deferred to daily report; wired into run_daily.c
+  2026-11-13 | SYSTEM | INSTANT ALERT POLICY (user mandate): any error/problem/issue -> immediate email to [report-email] with subject "BodyQuest 3D ALERT: ..." (error + attempts + fix plan), never deferred to daily report; wired into run_daily.c
 
 QA'D BACKLOG READY FOR FUTURE DAYS (facts bundles)
   crack-knuckles.shots, swallow-gum.shots

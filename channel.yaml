@@ -28,7 +28,7 @@ upload:
   provider: zapier           # YouTubeV4CLIAPI
   visibility: private        # user reviews then publishes manually
   notify:
-    email: [email-redacted]   # Email by Zapier, after every upload
+    email: see state/private.yaml (untracked)   # Email by Zapier, after every upload
     whatsapp: pending-user-auth   # WhatsApp Notifications (auth URL in state/notifications.yaml)
 
 never_stop:
@@ -50,7 +50,7 @@ facebook:
   setup_date: "2026-11-15"
   page_name: "Body quest 3d"
   page_id: "1507545225771564"
-  admin_account: [email-redacted]   # Zapier Facebook Pages connection
+  admin_account: (see state/private.yaml fb_admin - untracked)   # Zapier Facebook Pages connection
   provider: zapier                      # FacebookV2CLIAPI (create_page_video)
   format: native_video                  # upload the MP4 itself; YouTube watch link goes in the description
   timing: after_public                  # never before the video is public on YouTube

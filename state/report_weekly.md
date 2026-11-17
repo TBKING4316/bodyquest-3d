@@ -26,7 +26,7 @@ WORK LOG (last 7 days, from journal)
   2026-11-13 | BRAND | AVATAR CORRECTION: prior session's avatar change had NOT actually taken (image at the "new" URL still showed old Entertainment-with-king logo — caught by downloading + visually in
   2026-11-12 | DAILY | What happens if you sleep only 5 hours a night? (score 82) | videos/2026-11-12-sleep-5-hours/sleep-5-hours.mp4 | 86t9S_JerWA | private | COMPLETE
   2026-11-12 | SYSTEM | never-stop autopilot live: Task Scheduler "BodyQuest 3D - Daily Autopilot" daily 16:00 + StartWhenAvailable catch-up, logs state/autopilot.log | - | - | - | COMPLETE
-  2026-11-12 | SYSTEM | notifications: email ACTIVE ([email-redacted], test delivered); WhatsApp pending user auth | - | - | - | IN_PROGRESS
+  2026-11-12 | SYSTEM | notifications: email ACTIVE ([report-email], test delivered); WhatsApp pending user auth | - | - | - | IN_PROGRESS
   2026-11-12 | SYSTEM | cloud fallback built: repo (channel+state+facts bank+skill engine+runner+workflow) committed; waiting GitHub auth to push + first run | - | - | - | IN_PROGRESS
   2026-11-12 | SYSTEM | adopted youtube-master skill: channel-config.json, ledger.jsonl (2 migrated), episodes/ layout, QA gate, official-API upload path (pending client_secret.json from user; Zapier st
   2026-11-12 | SYSTEM | CLOUD FALLBACK VERIFIED: full render pipeline on GitHub ubuntu runner (897 frames + mix, ~14 min, 2x local speed); remaining fix: git push rebase in commit step | - | - | - | COM

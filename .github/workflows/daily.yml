@@ -1,11 +1,14 @@
 name: daily
-# BodyQuest 3D cloud fallback — produces the daily Short when the PC didn't.
-# Local PC (Task Scheduler 16:00) is the YouTube uploader of record; this run
-# renders + hosts + commits state, and the local catch-up uploads it on next boot.
+# BodyQuest 3D — CLOUD PRODUCTION (user mandate 2026-11-16: all work in the cloud, 3 videos/day,
+# scheduled evening publish slots 15:00/18:00/21:00 PKT).
+# Three runs/day (07:30, 10:30, 13:30 UTC) so each render finishes before its same-day slot.
+# Each run: quota check -> pick highest-score READY topic (facts + shots.js) -> voice/words/mix
+# -> HQ render (res=1 aa=4 shadow=2048) -> QA -> upload via official API (private + publishAt
+# next free slot) -> commit state. The LOCAL daily run is fallback/authoring only.
 
 on:
   schedule:
-    - cron: "0 20 * * *"   # 20:00 UTC — after the local daily window
+    - cron: "30 7,10,13 * * *"
   workflow_dispatch:
     inputs:
       force_test:

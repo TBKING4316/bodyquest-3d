@@ -1,0 +1,36 @@
+{
+  "slug": "never-sleep",
+  "topic": "What happens if you never sleep at all?",
+  "title": "What Happens If You Never Sleep At All?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "NIH National Institute of Neurological Disorders and Stroke, 'Brain Basics: Understanding Sleep' (adenosine builds up while awake and is cleared during sleep - sleep pressure)",
+    "Cleveland Clinic, 'Sleep Deprivation' / 'What Happens When You Don't Sleep?' (reaction time drops, microsleeps, hallucinations after days without sleep, immune system and blood sugar effects)",
+    "Van Dongen HPA et al., 'The Cumulative Cost of Additional Wakefulness: Dose-Response Effects on Neurobehavioral Functions and Sleep Physiology.' Sleep 26(2):117-126 (2003): chronic sleep debt degrades reaction time and attention cumulatively",
+    "Wikipedia, 'Sleep deprivation' (accessed 2026-11-17): 'it appears that brief microsleeps cannot be avoided'; 'Long-term total sleep deprivation has caused death in lab animals'; sleep loss amplifies inflammatory cytokines (immune stress)",
+    "Wikipedia, 'Fatal insomnia' (accessed 2026-11-17): rare neurodegenerative prion disease (PRNP mutation, fatal familial insomnia); characterized by thalamic degeneration - the thalamus regulates sleep and alertness; patients succumb to total insomnia; death within months to a few years; invariably fatal"
+  ],
+  "lines": [
+    { "text": "What happens if you never sleep at all?", "caps": "WHAT *HAPPENS | IF YOU *NEVER | SLEEP AT *ALL?" },
+    { "text": "Night one is mostly just miserable.", "caps": "*NIGHT ONE | IS MOSTLY | JUST *MISERABLE" },
+    { "text": "A chemical called adenosine stacks up in your brain.", "caps": "A *CHEMICAL | CALLED *ADENOSINE | STACKS *UP" },
+    { "text": "It is sleep pressure, and it only climbs.", "caps": "IT'S *SLEEP PRESSURE | AND IT | ONLY *CLIMBS" },
+    { "text": "By night two, your reaction time crumbles.", "caps": "BY *NIGHT TWO | YOUR *REACTION TIME | *CRUMBLES" },
+    { "text": "Your brain starts forcing microsleeps.", "caps": "YOUR *BRAIN | STARTS *FORCING | *MICROSLEEPS" },
+    { "text": "Blackouts of a few seconds, eyes wide open.", "caps": "*BLACKOUTS | A FEW *SECONDS | EYES *WIDE OPEN" },
+    { "text": "After three or four days, some people see things.", "caps": "*THREE OR | *FOUR DAYS | SOME *SEE THINGS" },
+    { "text": "Immune defenses dip, and blood sugar swings.", "caps": "*IMMUNE | DEFENSES *DIP | BLOOD *SUGAR SWINGS" },
+    { "text": "In lab animals, total sleep loss is fatal.", "caps": "IN *LAB ANIMALS | TOTAL *SLEEP LOSS | IS *FATAL" },
+    { "text": "Humans have one rare disease like it.", "caps": "*HUMANS HAVE | ONE *RARE DISEASE | LIKE IT" },
+    { "text": "Fatal insomnia destroys the brain's sleep center.", "caps": "*FATAL INSOMNIA | *DESTROYS | THE *SLEEP CENTER" },
+    { "text": "But you almost never get that far.", "caps": "BUT YOU | *ALMOST NEVER | GET THAT *FAR" },
+    { "text": "Your brain grabs sleep in pieces, without asking.", "caps": "YOUR *BRAIN | GRABS *SLEEP IN PIECES | WITHOUT *ASKING" },
+    { "text": "You can refuse to sleep.", "caps": "YOU CAN | *REFUSE | TO SLEEP" },
+    { "text": "Your brain won't.", "caps": "YOUR *BRAIN | *WON'T" }
+  ]
+}

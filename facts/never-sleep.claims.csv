@@ -1,0 +1,9 @@
+claim,source URL,source date,confidence
+Adenosine builds up in the brain while awake and is cleared during sleep; it is the chemical basis of sleep pressure,https://www.ninds.nih.gov/health-information/publications/brain-basics-understanding-sleep,2026-11-17,high
+Chronic sleep debt cumulatively degrades reaction time and attention (daily lapses worsen with each night of insufficient sleep),https://pubmed.ncbi.nlm.nih.gov/12683469/,2003-04,high
+Brief microsleeps cannot be avoided under total sleep deprivation; attentional lapses (PVT errors) are attributable to microsleeps,https://en.wikipedia.org/wiki/Sleep_deprivation,2026-11-17,high
+After several days without sleep some people experience hallucinations; immune changes and blood sugar dysregulation occur,https://my.clevelandclinic.org/health/diseases/23970-sleep-deprivation,2026-11-17,medium
+Sleep loss amplifies inflammatory cytokines (immune stress); immune resistance requires sleep,https://en.wikipedia.org/wiki/Sleep_deprivation,2026-11-17,medium
+Long-term total sleep deprivation has caused death in lab animals (script hedges to animals only, never claims human death from ordinary sleeplessness),https://en.wikipedia.org/wiki/Sleep_deprivation,2026-11-17,high
+Fatal insomnia is a rare neurodegenerative prion disease (PRNP mutation, familial form = fatal familial insomnia) characterized by thalamic degeneration; the thalamus regulates sleep and alertness; patients succumb to total insomnia and death occurs within months to a few years; invariably fatal,https://en.wikipedia.org/wiki/Fatal_insomnia,2026-11-17,high
+Healthy brains cannot stay awake forever: sleep-deprived people lapse into microsleeps whether they like it or not ('your brain grabs sleep in pieces without asking'),https://en.wikipedia.org/wiki/Sleep_deprivation,2026-11-17,high

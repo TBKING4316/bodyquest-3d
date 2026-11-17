@@ -75,7 +75,10 @@ ideas:
   - topic: What happens if you pop a pimple?
     score: 77
     why: gross-but-fascinating archetype (added 2026-11-17 - facts + QA'd shots already in facts/ bank, ready for cloud render)
-    used: false
+    used: true
+    used_on: "2026-11-17"
+    youtube_id: PENDING_UPLOAD
+    produced_by: cloud
   - topic: What happens if you never wash your belly button?
     score: 79
     why: gross archetype; omphalolith case reports + the 2019 navel-biome study (2,300+ species); discovery moment is powerful

@@ -1,0 +1,36 @@
+{
+  "slug": "too-much-water",
+  "topic": "What happens if you drink too much water?",
+  "title": "What Happens If You Drink Too Much Water?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "Wikipedia, 'Water intoxication' (accessed 2026-11-17): potentially fatal disturbance in brain functions from excessive water intake; healthy kidneys can excrete approximately 800 millilitres to one litre of water per hour; at onset, fluid with excessively low solutes moves into cells to balance osmotic concentration, causing cells to swell; swelling increases intracranial pressure - headache, confusion, then seizures, brain damage, coma, or death; most deaths in healthy individuals from water-drinking contests or long bouts of exercise (2007 'Hold Your Wee for a Wii' contest death; Leah Betts 1995); 13% of 2002 Boston Marathon finishers studied had hyponatremia (dilutional); US Army recommendation: no more than 1-1.5 L per hour of heavy sweating",
+    "Wikipedia, 'Hyponatremia' (accessed 2026-11-17): hyponatremia is a low sodium concentration in the blood (below 135 mmol/L); sodium is the dominant electrolyte balancing fluid between the inside and outside of cells",
+    "Cleveland Clinic, 'Hyponatremia' / 'Dehydration' patient pages (sodium balances the water in and around your cells; drinking too much water dilutes blood sodium)",
+    "Almond CS et al., 'Hyponatremia among runners in the Boston Marathon.' N Engl J Med 352:1550-1556 (2005): 13% of studied runners finished with hyponatremia; strongest predictor was weight gain while racing (over-hydration)",
+    "US Army Public Health Command guidance via Wikipedia Water intoxication: no more than 1-1.5 L of water per hour of heavy sweating"
+  ],
+  "lines": [
+    { "text": "What happens if you drink too much water?", "caps": "WHAT *HAPPENS | IF YOU DRINK | TOO MUCH *WATER?" },
+    { "text": "Your kidneys can only process so much.", "caps": "YOUR *KIDNEYS | CAN ONLY | *PROCESS | SO MUCH" },
+    { "text": "About one liter every hour, at best.", "caps": "ABOUT *ONE LITER | EVERY *HOUR | AT *BEST" },
+    { "text": "Drink faster, and water backs up into your blood.", "caps": "DRINK *FASTER | AND *WATER | BACKS UP | INTO YOUR *BLOOD" },
+    { "text": "Your blood gets diluted.", "caps": "YOUR *BLOOD | GETS *DILUTED" },
+    { "text": "Sodium, the salt balancing your fluids, drops.", "caps": "*SODIUM | THE *SALT | BALANCING YOUR *FLUIDS | *DROPS" },
+    { "text": "Water slides into your cells to rebalance.", "caps": "*WATER | *SLIDES INTO | YOUR *CELLS" },
+    { "text": "Your cells swell.", "caps": "YOUR *CELLS | *SWELL" },
+    { "text": "Most cells can take it.", "caps": "*MOST CELLS | CAN *TAKE IT" },
+    { "text": "Brain cells cannot.", "caps": "*BRAIN CELLS | *CANNOT" },
+    { "text": "Your skull is a closed box.", "caps": "YOUR *SKULL | IS A *CLOSED BOX" },
+    { "text": "Swelling builds pressure inside it.", "caps": "*SWELLING | *BUILDS | *PRESSURE | INSIDE IT" },
+    { "text": "That brings headache, confusion, seizures.", "caps": "THAT *BRINGS | *HEADACHE | *CONFUSION | *SEIZURES" },
+    { "text": "It can even be fatal.", "caps": "IT CAN *EVEN | BE *FATAL" },
+    { "text": "Marathon runners and water contests proved it.", "caps": "*MARATHON RUNNERS | AND *WATER CONTESTS | *PROVED IT" },
+    { "text": "So sip, don't flood.", "caps": "SO *SIP | DON'T *FLOOD" }
+  ]
+}

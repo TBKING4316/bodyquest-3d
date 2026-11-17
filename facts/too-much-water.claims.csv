@@ -1,0 +1,11 @@
+claim,source URL,source date,confidence
+Water intoxication is a potentially fatal disturbance in brain functions resulting from excessive water intake pushing electrolytes outside safe limits,https://en.wikipedia.org/wiki/Water_intoxication,2026-11-17,high
+Healthy kidneys can excrete approximately 800 mL to one litre of water per hour (US Army guidance via the same source: no more than 1-1.5 L per hour of heavy sweating); script rounds to 'about one liter every hour, at best',https://en.wikipedia.org/wiki/Water_intoxication,2026-11-17,high
+When intake exceeds excretion, fluid with excessively low solutes moves into cells to balance osmotic concentration, causing cells to swell,https://en.wikipedia.org/wiki/Water_intoxication,2026-11-17,high
+Hyponatremia = low blood sodium (below 135 mmol/L); sodium is the dominant electrolyte balancing fluid between the inside and outside of cells,https://en.wikipedia.org/wiki/Hyponatremia,2026-11-17,high
+Most body cells can tolerate swelling; brain cells cannot because the skull is a closed box - swelling raises intracranial pressure,https://en.wikipedia.org/wiki/Water_intoxication,2026-11-17,high
+Increased intracranial pressure brings headache, confusion, then seizures, and can progress to brain damage, coma, or death (script hedges: 'it CAN even be fatal'),https://en.wikipedia.org/wiki/Water_intoxication,2026-11-17,high
+Most deaths in healthy individuals resulted from water-drinking contests or long bouts of exercise; 13% of 2002 Boston Marathon finishers studied had hyponatremia (script: 'marathon runners and water contests proved it'),https://en.wikipedia.org/wiki/Water_intoxication,2026-11-17,high
+13% of studied runners finished the 2002 Boston Marathon with hyponatremia; strongest predictor was weight gain while racing (over-hydration),https://pubmed.ncbi.nlm.nih.gov/15814848/,2005-04-14,high
+Drinking six litres in three hours has caused a human death (supports 'it can even be fatal' hedged claim),https://en.wikipedia.org/wiki/Water_intoxication,2026-11-17,high
+Prevention: drink to thirst / sip rather than flood - consistent with kidney excretion ceiling of ~1 L/hour,https://en.wikipedia.org/wiki/Water_intoxication,2026-11-17,medium

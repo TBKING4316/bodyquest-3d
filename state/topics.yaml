@@ -39,12 +39,12 @@ ideas:
     score: 88
     why: extreme hook + fatal familial insomnia (real documented cases, NMJ/NCBI) - total sleep deprivation kills; peak curiosity archetype
     used: false
-    claimed_by: cloud-ready  # facts/never-sleep.json + QA'd shots.js committed 2026-11-17 (facts/never-sleep.qa.md PASS) - next cloud run picks it
+    # facts/never-sleep.json + QA'd shots.js committed 2026-11-17 (facts/never-sleep.qa.md PASS) - next cloud run picks it
   - topic: What happens if you drink too much water?
     score: 87
     why: counterintuitive scare (water can kill - hyponatremia); documented marathon + water-chugging-contest deaths; perfect balance/overload x-ray visual
     used: false
-    claimed_by: cloud-ready  # facts/too-much-water.json + QA'd shots.js committed 2026-11-17 (facts/too-much-water.qa.md PASS) - queue after never-sleep
+    # facts/too-much-water.json + QA'd shots.js committed 2026-11-17 (facts/too-much-water.qa.md PASS) - queue after never-sleep
   - topic: What happens if you sleep with your contact lenses in?
     score: 85
     why: fear archetype + real Pseudomonas/corneal-ulcer case reports (CDC/FDA warnings); millions of contact wearers personally affected - high share rate
@@ -52,11 +52,11 @@ ideas:
     used_on: "2026-11-16"
     produced_by: local (direct user order: 'make new content, ultra max detailed, check before upload')
     claimed_by: opencode-direct  # produced + uploaded directly by the interactive session, NOT the 16:00 runner
-  - topic: What happens if you look directly at the sun?
+  - topic: What happens if you stare at the sun?
     score: 84
     why: solar retinopathy - retina burn documented (NIH); eclipse Blindness stories; strong warning framing 'do not do this'
     used: false
-    claimed_by: cloud-ready  # facts/stare-at-sun.json + QA'd shots.js committed 2026-11-18 (facts/stare-at-sun.qa.md PASS) - queue after too-much-water
+    # facts/stare-at-sun.json + QA'd shots.js committed 2026-11-18 (facts/stare-at-sun.qa.md PASS) - queue after too-much-water
   - topic: What are tonsil stones and why do they smell so bad?
     score: 83
     why: top gross-but-fascinating archetype; tonsilloliths documented (volatile sulfur compounds); huge search demand, people discover they have them mid-video
@@ -78,7 +78,7 @@ ideas:
     why: gross-but-fascinating archetype (added 2026-11-17 - facts + QA'd shots already in facts/ bank, ready for cloud render)
     used: true
     used_on: "2026-11-17"
-    youtube_id: PENDING_UPLOAD
+    youtube_id: TsqIq439pBI
     produced_by: cloud
   - topic: What happens if you never wash your belly button?
     score: 79

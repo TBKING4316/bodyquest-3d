@@ -80,9 +80,10 @@ uploads:
     fb_posted: false  # facebook cross-posting PAUSED (page disabled 2026-11-15, channel.yaml enabled:false) - re-enable on user word "facebook back"
     fb_page: "Body quest 3d (1507545225771564)"
   - file: videos/2026-11-17-pop-pimple/pop-pimple.mp4
-    youtube_id: PENDING_UPLOAD
-    visibility: pending_upload_local
+    youtube_id: TsqIq439pBI
+    visibility: "private (publishAt 2026-11-18T10:00:00Z = 15:00 PKT)"
     hosted_url: -
-    uploaded_at: "2026-11-17T11:31:16.212206+05:00"
+    uploaded_at: "2026-11-18T07:20:00+05:00"
     produced_by: cloud
+    uploaded_by: local-catchup  # cloud upload crashed (system python3 lacked googleapiclient); uploaded locally 2026-11-18
     title: What Happens If You Pop A Pimple?

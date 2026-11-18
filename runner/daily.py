@@ -229,7 +229,7 @@ def build_episode_and_upload(slug, title, sources, mp4):
         return ep_dir, None, None
     try:
         log("uploading via official YouTube API (private + next free evening slot)...")
-        up = subprocess.run(["python3", "scripts/upload_video.py", "--episode", str(ep_dir)],
+        up = subprocess.run([VENV_PY, "scripts/upload_video.py", "--episode", str(ep_dir)],
                             cwd=ROOT, capture_output=True, text=True, timeout=1800)
         if up.returncode != 0:
             log(f"upload_video.py failed: {up.stdout[-400:]} {up.stderr[-400:]}")

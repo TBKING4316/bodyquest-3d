@@ -1,0 +1,36 @@
+{
+  "slug": "stare-at-sun",
+  "topic": "What happens if you stare at the sun?",
+  "title": "What Happens If You Stare At The Sun?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "Wikipedia, 'Photic retinopathy' (accessed 2026-11-17): damage to the eye's retina, particularly the macula, from prolonged exposure to solar radiation; includes solar retinopathy",
+    "Wikipedia, 'Photic retinopathy' (accessed 2026-11-17): retinal damage appears to occur primarily due to photochemical injury rather than thermal injury; the temperature rise from looking at the Sun with a 3-mm pupil only causes a 4 degree C increase, insufficient to photocoagulate; light promotes oxidation - chemical reactions occur in exposed tissues with unbonded oxygen molecules",
+    "Wikipedia, 'Photic retinopathy' (accessed 2026-11-17): symptoms include a spot in vision that does not go away, blurring, eye pain or headaches; impairment usually in both eyes; 20/20 vision usually ends up about 20/40 or 20/60, but can be far worse; mild cases show a foveal yellow spot in the first days, replaced by a reddish dot often surrounded by pigment after a few days",
+    "Wikipedia, 'Photic retinopathy' (accessed 2026-11-17): generally goes away on its own over time but there is no specific treatment known to be reliable for speeding recovery; people generally recover visual acuity completely within two months, though severe cases may take longer or never see complete recovery",
+    "American Academy of Ophthalmology, 'How to Watch a Solar Eclipse Safely' (patient guidance, accessed 2026-11-17): never look directly at the sun without certified solar filters (ISO 12312-2 eclipse glasses); ordinary sunglasses are not safe; documented surge of solar retinopathy cases after the 2017 eclipse (JAMA Ophthalmology studies of eclipse-related macular injury)"
+  ],
+  "lines": [
+    { "text": "What happens if you stare at the sun?", "caps": "WHAT *HAPPENS | IF YOU *STARE | AT THE *SUN?" },
+    { "text": "Your lens focuses sunlight onto your retina.", "caps": "YOUR *LENS | FOCUSES *SUNLIGHT | ONTO YOUR *RETINA" },
+    { "text": "Like a magnifying glass on a leaf.", "caps": "LIKE A *MAGNIFYING GLASS | ON A *LEAF" },
+    { "text": "But here is the twist: it is not a burn.", "caps": "HERE IS THE *TWIST | IT IS | *NOT A BURN" },
+    { "text": "Your retina warms about four degrees.", "caps": "YOUR *RETINA | WARMS ABOUT | *FOUR DEGREES" },
+    { "text": "The light triggers chemical reactions.", "caps": "THE *LIGHT | *TRIGGERS | CHEMICAL *REACTIONS" },
+    { "text": "Oxidation attacks your photoreceptors.", "caps": "*OXIDATION | *ATTACKS | YOUR *PHOTORECEPTORS" },
+    { "text": "That leaves a yellow spot on your macula.", "caps": "THAT *LEAVES | A *YELLOW SPOT | ON YOUR *MACULA" },
+    { "text": "Doctors see it turn red within days.", "caps": "*DOCTORS SEE | IT TURN *RED | WITHIN *DAYS" },
+    { "text": "You get a blind spot that will not go away.", "caps": "YOU GET A *BLIND SPOT | THAT WILL | *NOT GO AWAY" },
+    { "text": "Vision drops to about 20/40, sometimes far worse.", "caps": "*VISION DROPS | TO ABOUT *20/40 | SOMETIMES *WORSE" },
+    { "text": "Usually in both eyes at once.", "caps": "*USUALLY IN | *BOTH EYES | AT *ONCE" },
+    { "text": "It usually heals within a month or two.", "caps": "IT *USUALLY HEALS | WITHIN A | *MONTH OR TWO" },
+    { "text": "But severe cases never fully recover.", "caps": "BUT *SEVERE CASES | *NEVER | FULLY *RECOVER" },
+    { "text": "After every eclipse, eye clinics see the damage.", "caps": "AFTER EVERY *ECLIPSE | EYE *CLINICS | SEE THE *DAMAGE" },
+    { "text": "So never look directly. Use eclipse glasses.", "caps": "SO *NEVER LOOK | *DIRECTLY | USE *ECLIPSE GLASSES" }
+  ]
+}

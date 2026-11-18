@@ -56,6 +56,7 @@ ideas:
     score: 84
     why: solar retinopathy - retina burn documented (NIH); eclipse Blindness stories; strong warning framing 'do not do this'
     used: false
+    claimed_by: cloud-ready  # facts/stare-at-sun.json + QA'd shots.js committed 2026-11-18 (facts/stare-at-sun.qa.md PASS) - queue after too-much-water
   - topic: What are tonsil stones and why do they smell so bad?
     score: 83
     why: top gross-but-fascinating archetype; tonsilloliths documented (volatile sulfur compounds); huge search demand, people discover they have them mid-video

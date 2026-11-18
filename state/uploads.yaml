@@ -87,3 +87,10 @@ uploads:
     produced_by: cloud
     uploaded_by: local-catchup  # cloud upload crashed (system python3 lacked googleapiclient); uploaded locally 2026-11-18
     title: What Happens If You Pop A Pimple?
+  - file: videos/2026-11-18-never-sleep/never-sleep.mp4
+    youtube_id: -1_Ynf93Yvc
+    visibility: private (publishAt 2026-11-18T13:00:00Z)
+    hosted_url: -
+    uploaded_at: "2026-11-18T07:45:04.804577+05:00"
+    produced_by: cloud
+    title: What Happens If You Never Sleep At All?

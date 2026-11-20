@@ -68,3 +68,4 @@
 2026-11-17 | CLOUD-DAILY | What happens if you pop a pimple? (cloud render+upload) | videos/2026-11-17-pop-pimple/pop-pimple.mp4 | PENDING_UPLOAD | pending_upload_local | 39.6s hosted: -
 2026-11-18 | CLOUD-DAILY | What happens if you never sleep at all? (cloud render+upload) | videos/2026-11-18-never-sleep/never-sleep.mp4 | -1_Ynf93Yvc | private+publishAt 2026-11-18T13:00:00Z | 45.2s hosted: -
 2026-11-19 | CLOUD-DAILY | What happens if you drink too much water? (cloud render+upload) | videos/2026-11-19-too-much-water/too-much-water.mp4 | PENDING_UPLOAD | pending_upload_local | 37.3s hosted: -
+2026-11-20 | CLOUD-DAILY | What happens if you stare at the sun? (cloud render+upload) | videos/2026-11-20-stare-at-sun/stare-at-sun.mp4 | PENDING_UPLOAD | pending_upload_local | 45.5s hosted: -

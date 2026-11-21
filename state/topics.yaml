@@ -47,10 +47,11 @@ ideas:
     score: 87
     why: counterintuitive scare (water can kill - hyponatremia); documented marathon + water-chugging-contest deaths; perfect balance/overload x-ray visual
     used: true
-    used_on: "2026-11-19"
-    youtube_id: PENDING_UPLOAD
-    produced_by: cloud
-    # facts/too-much-water.json + QA'd shots.js committed 2026-11-17 (facts/too-much-water.qa.md PASS) - queue after never-sleep
+    used_on: "2026-11-21"
+    youtube_id: 7lu_gEFMw6A
+    produced_by: local-max (2026-11-21, user-ordered 11:10 PKT slot, published via Zapier)
+    # facts/too-much-water.json + QA'd shots.js committed 2026-11-17 (facts/too-much-water.qa.md PASS)
+    # cloud rendered a copy 2026-11-19 but could not upload (OAuth revoked) - superseded by this MAX render
   - topic: What happens if you sleep with your contact lenses in?
     score: 85
     why: fear archetype + real Pseudomonas/corneal-ulcer case reports (CDC/FDA warnings); millions of contact wearers personally affected - high share rate

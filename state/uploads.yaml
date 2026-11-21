@@ -113,3 +113,10 @@ uploads:
     uploaded_via: zapier (YouTubeV4CLIAPI) - official API token was revoked 2026-11-19
     thumbnail_set: true
     notes: "MAX render res=2 aa=8 shadow=4096; NaN GRADE sanitization + no DOF in x-ray/skull worlds (fixed black box + white splat saw in first pass); pill auto-fit for long labels; QA PASS incl. frame-exact hook check"
+  - file: videos/2026-11-20-stare-at-sun/stare-at-sun.mp4
+    youtube_id: PENDING_UPLOAD
+    visibility: pending_upload_local
+    hosted_url: -
+    uploaded_at: "2026-11-20T22:00:59.168681+05:00"
+    produced_by: cloud
+    title: What Happens If You Stare At The Sun?

@@ -15,3 +15,7 @@ replies.json
 state/private.yaml
 episodes/**/_build/
 
+
+state/auth_*.log
+state/auth_url.txt
+state/auth_done.txt

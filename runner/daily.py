@@ -266,7 +266,11 @@ def host_video(path):
 
 
 def main():
-    # --covered: cheap check for the workflow gate (exit 0 = covered/skip, 1 = produce)
+    # --covered: cheap check for the workflow gate.
+    #   0 = quota met, skip (covered)
+    #   1 = a READY topic exists, produce
+    #   2 = BLOCKED: quota not met but no READY topic - must fail loudly, never look "covered"
+    #       (2026-11-22..25 the queue ran dry and every run silently skipped for 5 days)
     if "--covered" in sys.argv:
         q = daily_quota()
         n = produced_today()
@@ -276,9 +280,14 @@ def main():
         except LookupError as e:
             ready = False
             print(f"no ready topic: {e}")
-        covered = n >= q or not ready
-        print(f"today(PKT)={today_pkt()} produced_today={n}/{q} ready_topic={ready} covered={covered}")
-        return 0 if covered else 1
+        if n >= q:
+            print(f"today(PKT)={today_pkt()} produced_today={n}/{q} ready_topic={ready} covered=True")
+            return 0
+        if not ready:
+            print(f"today(PKT)={today_pkt()} produced_today={n}/{q} ready_topic=False covered=False BLOCKED=no-ready-topic")
+            return 2
+        print(f"today(PKT)={today_pkt()} produced_today={n}/{q} ready_topic=True covered=False")
+        return 1
 
     if FORCE_TEST:
         log("FORCE TEST: throwaway script, full pipeline, no state changes")

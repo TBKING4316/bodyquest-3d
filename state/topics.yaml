@@ -62,11 +62,12 @@ ideas:
   - topic: What happens if you stare at the sun?
     score: 84
     why: solar retinopathy - retina burn documented (NIH); eclipse Blindness stories; strong warning framing 'do not do this'
-    used: true
-    used_on: "2026-11-20"
-    youtube_id: PENDING_UPLOAD
-    produced_by: cloud
-    # facts/stare-at-sun.json + QA'd shots.js committed 2026-11-18 (facts/stare-at-sun.qa.md PASS) - queue after too-much-water
+    used: false
+    # 2026-11-26 recovery: cloud rendered it 2026-11-20 but the upload died on the revoked OAuth token
+    # and no local copy exists (artifact expired). Re-opened so the cloud re-renders and actually publishes
+    # it instead of the topic being silently lost as PENDING_UPLOAD forever.
+    notes: "re-render + upload pending (2026-11-20 render lost, never published)"
+    # facts/stare-at-sun.json + QA'd shots.js committed 2026-11-18 (facts/stare-at-sun.qa.md PASS)
   - topic: What are tonsil stones and why do they smell so bad?
     score: 83
     why: top gross-but-fascinating archetype; tonsilloliths documented (volatile sulfur compounds); huge search demand, people discover they have them mid-video
@@ -78,7 +79,11 @@ ideas:
   - topic: What happens if you hold in a fart?
     score: 80
     why: funny + gross + shareable; composition/absorption documented; rare spontaneous pneumoscrotum case reports give real evidence
-    used: false
+    used: true
+    used_on: "2026-11-25"
+    youtube_id: YATY5kQUWYQ
+    produced_by: faceless-shorts (manual session, NOT this runner)
+    notes: "published via the manual faceless-shorts pipeline; marked used so the cloud cannot duplicate it"
   - topic: What happens if you sneeze with your eyes open?
     score: 78
     why: the most argued body myth (eyes pop out - they do not; orbit anatomy); myth-bust archetype with strong comment bait 'try it'

@@ -127,3 +127,11 @@ uploads:
     uploaded_at: "2026-11-26T07:29:42.574718+05:00"
     produced_by: cloud
     title: What Happens If You Stare At The Sun?
+
+  - file: episodes/2026-11-27-stop-drinking-water/video.mp4
+    youtube_id: lYlhRrj_PRE
+    visibility: "private (publishAt 2026-11-27T10:00:00Z = 15:00 PKT)"
+    uploaded_at: "2026-11-27T02:25:00+05:00"
+    produced_by: local-gpu (faceless-shorts no-water project, re-rendered 2026-11-27)
+    title: "What Happens If You Stop Drinking Water?"
+    notes: "Revived the never-published 2026-11-16 leftover. Fixed the blown-out brain shots (S04/S05: emissive + bloom clipping) and re-rendered at 1080x1920/30fps. QA PASS with frame checks at 2/8/13/14.5/16.5/24/34.5s."
